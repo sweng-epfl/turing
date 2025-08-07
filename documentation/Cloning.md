@@ -1,8 +1,8 @@
 # Obtenir une copie locale de ce dépôt
 
-Dès [le troisième cours](../cours/Testing), les étudiants doivent obtenir une copie locale de ce dépôt pour faire les exercices.
+Dès [la troisième partie](../cours/Testing), les étudiants doivent obtenir une copie locale de ce dépôt pour faire les exercices.
 
-Ce dépôt utilise Git, qui est expliqué dans [le cours sur la gestion de version](../cours/Versions).
+Ce dépôt utilise Git, qui est expliqué dans [la partie Infrastructure](../cours/Infrastructure).
 
 Pour cloner ce dépôt, allez dans la page d'accueil de ce dépôt sur GitHub, cliquez sur le bouton "Code", et GitHub vous montrera l'URL à utiliser pour `git clone`.
 

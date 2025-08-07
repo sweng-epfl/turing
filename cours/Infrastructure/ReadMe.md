@@ -1,4 +1,4 @@
-# Gestion de versions
+# Infrastructure
 
 **Prérequis** : Pour suivre cette partie, vous devez :
 > - Installer Git. Sous Windows, utilisez [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) car Git est principalement conçu pour Linux.
@@ -35,6 +35,7 @@ C'est là que l'infrastructure entre en jeu.
 - Contraster les anciens et les nouveaux systèmes de _gestion de version_
 - Organiser votre code avec le système de gestion de version _Git_.
 - Rédiger des descriptions utiles des modifications du code
+- Éviter les erreurs avec l'_intégration continue_
 
 
 ## Qu'est-ce que la gestion de version ?
@@ -573,10 +574,149 @@ Les détails doivent décrire _ce que_ les changements font et _pourquoi_ vous l
 Il est inutile de décrire comment, car le message de commit est associé au contenu du commit, et celui-ci décrit déjà la manière dont vous avez modifié le code.
 
 
+## Comment éviter de fusionner du code bogué ?
+
+La fusion de code bogué dans la branche principale d'un dépôt est une gêne pour tous les contributeurs de ce dépôt.
+Ils devront corriger le code avant de faire le travail qu'ils veulent réellement faire, et ils ne le corrigeront peut-être pas tous de la même manière, ce qui entraînera des conflits.
+
+Idéalement, nous n'accepterions les demandes de retrait que si le code résultant compile, est "propre" selon les normes de l'équipe et a été testé.
+Chaque équipe a une idée différente de ce qu'est un code "propre", ainsi que de ce que signifie le terme "test", qui peut être manuel, automatisé, effectué sur une ou plusieurs machines, etc.
+
+Lorsque l'on travaille dans un IDE, il existe généralement des options de menu permettant d'analyser le code
+pour en vérifier la propreté, le compiler, l'exécuter et lancer des tests automatisés si les développeurs en ont écrit.
+Cependant, tout le monde n'utilise pas le même IDE, ce qui signifie qu'ils peuvent avoir des définitions différentes de ce que ces opérations signifient.
+
+Le principal problème lié à l'utilisation d'opérations dans un IDE pour vérifier les propriétés du code est que les humains font des erreurs.
+Dans les projets de grande envergure, les erreurs humaines sont fréquentes.
+Par exemple, il n'est pas raisonnable de s'attendre à ce que des centaines de développeurs n'oublient jamais, ne serait-ce qu'une fois, de vérifier que le code se compile et s'exécute.
+Vérifier les erreurs de base est également une mauvaise utilisation du temps des gens.
+L'examen du code devrait porter sur la logique du code, et non sur la validité syntaxique de chaque ligne, ce qui est du ressort du compilateur.
+
+Nous aimerions plutôt _automatiser_ les étapes nécessaires à la vérification du code.
+Cela se fait à l'aide d'un _système de build_, tel que CMake pour C++, MSBuild pour C#, ou Gradle pour Java.
+Il existe de nombreux systèmes de build, dont certains prennent en charge plusieurs langues, mais ils offrent tous fondamentalement la même fonctionnalité : l'automatisation de tâches.
+Un système de build peut invoquer le compilateur sur les bons fichiers avec les bons drapeaux pour compiler le code, et invoquer le binaire résultant pour exécuter le code,
+et même effectuer des opérations plus complexes telles que le téléchargement de dépendances sur la base de leur nom si elles n'ont pas déjà été téléchargées.
+
+Les systèmes de build sont configurés avec du code. Ils disposent généralement d'un langage déclaratif personnalisé intégré dans un autre langage tel que le XML.
+Voici un exemple de code de construction pour MSBuild :
+```xml
+<Projet Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Z3" Version="4.10.2" />
+  </ItemGroup>
+</Projet>
+```
+Ce code indique à MSBuild que (1) il s'agit d'un projet .NET, qui est le runtime typiquement associé à C#, et (2) qu'il dépend de la librairie `Microsoft.Z3`, en particulier de sa version `4.10.2`.
+On peut alors lancer MSBuild avec ce fichier à partir de la ligne de commande, et MSBuild compilera le projet après avoir téléchargé la librairie dont il dépend, si elle n'a pas déjà été téléchargée.
+Dans ce cas, le nom de la librairie est associé à une librairie réelle en recherchant le nom sur [NuGet](https://www.nuget.org/), le catalogue de librairies associé à MSBuild.
+
+Les systèmes de build suppriment la dépendance à l'égard d'un IDE pour la construction et l'exécution du code, ce qui signifie que chacun peut utiliser l'éditeur de son choix à condition d'utiliser le même système de build.
+La plupart des IDE peuvent utiliser le code du système de build comme base pour leur propre configuration. Par exemple, le fichier ci-dessus peut être utilisé tel quel par Visual Studio pour configurer un projet.
+
+Les systèmes de build permettent aux développeurs de construire, d'exécuter et de vérifier leur code n'importe où.
+Mais il faut bien qu'il soit quelque part, alors quelle(s) machine(s) doivent-ils utiliser ?
+Une fois de plus, l'utilisation de la machine spécifique d'un développeur n'est pas une bonne idée, car les développeurs personnalisent leur machine en fonction de leurs préférences personnelles.
+Les machines utilisées par les développeurs peuvent ne pas être représentatives des machines sur lesquelles le logiciel fonctionnera réellement lorsqu'il sera utilisé par les clients.
+
+De la même manière que nous avons défini les constructions à l'aide de code via un système de build, nous pouvons définir les environnements à l'aide de code !
+Voici un exemple de code de définition de l'environnement pour le système de conteneurs Docker, que vous n'avez pas besoin de comprendre :
+```
+FROM node:12-alpine
+RUN apk add python g++ make
+COPY . .
+RUN yarn install
+CMD ["node", "src/index.js"]
+EXPOSE 3000
+```
+Ce code indique à Docker d'utiliser l'environnement de base `node:12-alpine`, qui a Node.js préinstallé sur un environnement Linux Alpine.
+Ensuite, Docker doit exécuter `apk add` pour installer des paquets spécifiques, y compris `make`, un système de build.
+Docker doit alors copier le répertoire courant à l'intérieur du conteneur, et lancer `yarn install` pour invoquer le système de build `yarn` de Node.js afin de pré-installer les dépendances.
+Le fichier indique également à Docker la commande à exécuter lors du démarrage de cet environnement et le port HTTP à exposer au monde extérieur.
+
+La définition d'un environnement à l'aide de code permet aux développeurs d'exécuter et de tester leur code
+dans des environnements spécifiques qui peuvent être personnalisés pour correspondre aux environnements des clients.
+Les développeurs peuvent également définir des environnements multiples, par exemple pour s'assurer que leur logiciel
+peut fonctionner sur différents systèmes d'exploitation, ou sur des systèmes d'exploitation dans différentes langues.
+
+Nous avons utilisé le terme "machine" pour désigner l'environnement dans lequel le code s'exécute, mais dans la pratique,
+il est peu probable qu'il s'agisse d'une machine physique, car cela serait inefficace et coûteux.
+Les "pull requests" et les "pushes" sont assez rares étant donné que les ordinateurs modernes
+peuvent effectuer des milliards d'opérations par seconde. Approvisionner une machine exclusivement pour un projet serait un gaspillage.
+
+Au lieu de cela, les constructions automatisées utilisent des _machines virtuelles_ ou des _conteneurs_.
+Une machine virtuelle est un programme qui émule une machine entière en son sein. Par exemple, il est possible d'exécuter une machine virtuelle Ubuntu sur Windows.
+Du point de vue de Windows, la machine virtuelle n'est qu'un programme parmi d'autres.
+Mais pour les programmes qui s'exécutent dans la machine virtuelle, c'est comme s'ils s'exécutaient sur du vrai matériel.
+Cela permet de partitionner les ressources : une seule machine physique peut faire tourner plusieurs machines virtuelles,
+surtout si ces dernières ne sont pas toutes occupées en même temps.
+Il isole également les programmes s'exécutant dans la machine virtuelle, ce qui signifie que même s'ils tentent de casser le système d'exploitation,
+le monde extérieur à la machine virtuelle n'est pas affecté.
+Cependant, les machines virtuelles ont des frais généraux, en particulier lorsqu'elles sont nombreuses.
+Même si 100 machines virtuelles exécutent toutes la même version de Windows, par exemple,
+elles doivent toutes exécuter une instance distincte de Windows, y compris le noyau Windows.
+C'est là qu'interviennent les _conteneurs_. Les conteneurs sont une forme légère de machines virtuelles qui partagent le noyau du système d'exploitation hôte au lieu d'inclure leur propre noyau.
+Il y a donc moins de duplication des ressources, au prix d'un moindre isolement.
+En règle générale, les services qui permettent à quiconque de télécharger du code utiliseront
+des machines virtuelles pour l'isoler autant que possible, tandis que les services privés peuvent utiliser des conteneurs puisqu'ils font confiance au code qu'ils exécutent.
+
+L'utilisation de systèmes de compilation et de machines virtuelles pour compiler,
+exécuter et vérifier automatiquement le code chaque fois qu'un développeur apporte des modifications est appelée _intégration continue_,
+et il s'agit d'une technique clé dans le développement des logiciels modernes.
+Lorsqu'un développeur ouvre une demande d'extraction, l'intégration continue peut effectuer les vérifications configurées, par exemple tester que le code se compile et qu'il passe une analyse statique.
+La fusion peut alors être bloquée si l'intégration continue ne réussit pas.
+Ainsi, personne ne peut accidentellement fusionner du code cassé dans la branche principale,
+et les développeurs qui examinent les demandes d'extraction n'ont pas besoin de vérifier manuellement que le code fonctionne.
+
+Il est important de noter que la réussite ou l'échec d'une opération spécifique d'intégration continue signifie qu'il existe une machine sur laquelle le code réussit ou échoue.
+Il est possible qu'un code fonctionne parfaitement sur la machine du développeur qui l'a écrit, mais qu'il échoue lors de l'intégration continue.
+Une réponse courante est "mais ça marche sur ma machine !", mais cela n'a rien à voir.
+L'objectif d'un logiciel n'est pas de fonctionner sur la machine du développeur, mais de fonctionner pour les utilisateurs.
+
+Les problèmes liés à l'intégration continue proviennent généralement de différences entre les machines des développeurs et les machines virtuelles configurées pour l'intégration continue.
+Par exemple, un développeur peut tester une application téléphonique sur son propre téléphone,
+avec un scénario de test consistant à "ouvrir la page 'créer un article' et cliquer sur le bouton 'non'", ce qu'il peut faire sans problème.
+Mais leur environnement d'intégration continue peut être configuré avec un émulateur de téléphone
+doté d'un petit écran avec peu de pixels, et la façon dont l'application est écrite signifie que l'on ne peut pas l'utiliser.
+le bouton "non" n'est pas visible :
+
+<p align="center"><img alt="Illustration de l'exemple des téléphones." src="images/phones.svg" width="50%" /></p>.
+
+Le code ne fonctionne donc pas dans l'environnement d'intégration continue, non pas à cause d'un problème d'intégration continue, mais parce que le code ne fonctionne pas sur certains téléphones.
+Le développeur devrait corriger le code pour que le bouton "Non" soit toujours visible, éventuellement sous le bouton "Oui" avec une barre de défilement si nécessaire.
+
+---
+
+#### Exercice : Ajouter l'intégration continue
+Retournez au dépôt GitHub que vous avez créé, et ajoutez l'intégration continue !
+GitHub inclut un service d'intégration continue appelé GitHub Actions, qui est gratuit pour une utilisation de base.
+Voici un fichier de base que vous pouvez utiliser, qui doit être nommé `.github/workflows/example.yml` :
+```yaml
+on: push
+jobs:
+  example:
+    runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - run: echo "Hello!"
+```
+Après avoir ajouté ce fichier au dépôt GitHub et attendu quelques secondes, vous devriez voir un cercle jaune à côté du commit indiquant que votre action est en cours d'exécution,
+que vous pouvez également voir dans l'onglet "Actions" du dépôt.
+Il s'agit d'une action très basique qui se contente de cloner le dépôt et d'imprimer du texte. Dans un scénario réel, vous devriez au moins invoquer un système de build.
+GitHub Actions est assez puissant, comme vous pouvez le lire sur [la documentation de GitHub Actions](https://docs.github.com/en/actions).
+
+---
+
+Le contrôle des versions, l'intégration continue et d'autres tâches de ce type étaient généralement appelés "opérations" et étaient effectués par une équipe distincte de l'équipe de "développement".
+Cependant, de nos jours, ces concepts se sont combinés en "DevOps", dans lequel la même équipe fait les deux,
+ce qui permet aux développeurs de configurer plus facilement exactement les opérations qu'ils souhaitent.
+
+
 ## Résumé
 
 Dans ce cours, vous avez appris :
 - Les systèmes de gestion de version et les différences entre la première, la deuxième et la troisième génération.
 - Git : comment l'utiliser pour des scénarios de base, et comment écrire de bons messages de commit.
+- Intégration continue : systèmes de build, machines virtuelles et conteneurs.
 
 Vous pouvez maintenant consulter les [exercices](exercices/) !

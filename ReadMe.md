@@ -29,13 +29,14 @@ Ce module demande une familiarité basique avec la programmation, et spécifique
 
 Les quatre premières parties doivent être faites dans l'ordre, car ce sont des prérequis pour le reste :
 
-1. [Introduction](cours/Introduction/) et [Exigences](cours/Exigences/)
-2. [Gestion de versions](cours/Versions/)
+1. [Introduction](cours/Introduction/)
+2. [Infrastructure](cours/Infrastructure/)
 3. Tests (TBD)
 4. Conception orientée objet (TBD)
 
 Le reste peut être fait dans n'importe quel ordre, par exemple :
 
+- [Exigences](cours/Exigences/)
 - Performance (TBD)
 - Débuggage (TBD)
 - Interface utilisateur (TBD)

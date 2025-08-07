@@ -2,8 +2,10 @@
 
 **Exercices théoriques**:
 
-- [Q1](Q1.md)
-- [Q2](Q2.md)
+- [Q1 : Gestion de versions](Q1.md)
+- [Q2 : Gestion de versions](Q2.md)
+- [Q3 : Intégration continue](Q3.md)
+- [Q4 : Intégration continue](Q4.md)
 
 Les [solutions](solutions/) sont disponibles.
 
@@ -17,3 +19,4 @@ essayez d'autres tutoriels en ligne tels que [le tutoriel Git officiel](https://
 
 - Utilisez Git pour votre propre projet, et essayez de créer des commits avec de bons messages et contenus
 - Hébergez votre projet sur un site d'hébergement Git tel que GitHub ou BitBucket
+- Utilisez l'intégration continue, par exemple avec GitHub Actions ou Cirrus CI
