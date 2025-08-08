@@ -31,14 +31,14 @@ Les quatre premières parties doivent être faites dans l'ordre, car ce sont des
 
 1. [Introduction](cours/Introduction/)
 2. [Infrastructure](cours/Infrastructure/)
-3. Tests (TBD)
+3. [Tests](cours/Tests/)
 4. Conception orientée objet (TBD)
 
 Le reste peut être fait dans n'importe quel ordre, par exemple :
 
 - [Exigences](cours/Exigences/)
 - Performance (TBD)
-- Débuggage (TBD)
+- [Débuggage](cours/Débuggage/)
 - Interface utilisateur (TBD)
 - Utilisation d'APIs (TBD)
 - Travail en équipe (TBD)
