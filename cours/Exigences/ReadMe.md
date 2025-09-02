@@ -8,7 +8,7 @@ Pour savoir _quel_ logiciel développer, nous devons connaître les besoins des 
 
 ## Objectifs
 
-Après cette conférence, vous devriez être en mesure de :
+Après cette partie, vous devriez être en mesure de :
 - Définir les besoins des utilisateurs
 - Formaliser les exigences en _personas_ et en _récits utilisateurs_
 - Comprendre les exigences _implicites_ et _explicites
