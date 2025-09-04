@@ -4,9 +4,7 @@
 > - Installer Git. Sous Windows, utilisez [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) car Git est principalement conçu pour Linux.
 >   Sur macOS, voir [la documentation de git] (https://git-scm.com/download/mac). Sous Linux, Git est peut-être déjà installé, ou utilisez la gestionnaire de paquets de votre distribution.
 >   Si vous avez installé Git avec succès, l'exécution de `git --version` dans la ligne de commande devrait afficher un numéro de version.
-> - Créer un compte GitHub (vous n'êtes pas obligé d'utiliser un compte GitHub existant, vous pouvez en créer un uniquement pour ce cours si vous le souhaitez)
-> - Configurer une clé SSH pour GitHub en suivant [leur documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
-> - Dites à Git qui vous êtes en lançant `git config --global user.name 'votre_nom'` avec votre nom et `git config --global user.email 'votre_email'` avec l'e-mail que vous avez utilisé pour GitHub.
+> - Dites à Git qui vous êtes en lançant `git config --global user.name 'votre_nom'` avec votre nom et `git config --global user.email 'votre_email'`.
 > - Choisissez un éditeur que Git ouvrira pour écrire un résumé de vos changements avec `git config --global core.editor 'votre_editeur'`,
 >   puisque Git utilise par défaut `vi` qui est difficile à utiliser pour les nouveaux venus.
 >   Sous Windows avec WSL, vous pouvez utiliser `notepad.exe`, qui ouvrira le Notepad de Windows.
@@ -18,6 +16,14 @@
 >
 > Si vous le souhaitez, vous pouvez définir le paramètre de configuration de Git `core.autocrlf` à `true` sur Windows et `input` sur Linux et macOS,
 > pour que Git convertisse automatiquement les fins de lignes à la manière d'Unix (`\n`) et les séparateurs de lignes à la manière de Windows (`\r\n`).
+
+**À l'EPFL**, nous utiliserons l'instance GitLab de l'EPFL, vous devez :
+> - Vous connecter à https://gitlab.epfl.ch avec votre compte EPFL
+> - Configurer une clé SSH pour GitLab en suivant [leur documentation](https://go.epfl.ch/turing-ssh)
+
+**Hors de l'EPFL**, vous pouvez utiliser GitHub, vous devez:
+> - Créer un compte GitHub (vous n'êtes pas obligé d'utiliser un compte GitHub existant, vous pouvez en créer un uniquement pour ce cours si vous le souhaitez)
+> - Configurer une clé SSH pour GitHub en suivant [leur documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
 
 
 Où stockez-vous votre code et comment le modifiez-vous ?
@@ -423,7 +429,7 @@ $ git clean -fd
 
 Maintenant notre `mistake.txt` a disparu.
 
-Enfin, avant de passer à GitHub, une dernière chose : gardez à l'esprit que Git ne suit que les _fichiers_, pas les _dossiers_.
+Enfin, avant de publier notre dépôt, une dernière chose : gardez à l'esprit que Git ne suit que les _fichiers_, pas les _dossiers_.
 Git ne garde trace des dossiers que s'ils font partie du chemin d'accès d'un fichier.
 
 Ainsi, si nous créons un dossier et demandons à Git ce qu'il voit, il nous dira qu'il n'y a rien, car le dossier est vide :
@@ -435,30 +441,30 @@ $ git status
 
 Si vous avez besoin d'inclure un dossier "vide" dans un dépôt Git pour une raison quelconque, vous devez y ajouter un fichier vide afin que Git puisse suivre le dossier en tant que partie de ce fichier.
 
-Publions maintenant notre dépôt. Allez sur [GitHub](https://github.com) et créez un dépôt en utilisant le bouton "New" sur la page d'accueil.
+Publions maintenant notre dépôt. Allez sur [l'instance GitLab de l'EPFL](https://gitlab.epfl.ch) ou [GitHub](https://github.com) et créez un dépôt.
 Vous pouvez le rendre public ou privé, mais ne créez pas de fichiers tels que des fichiers "Read Me" ou quoi que ce soit d'autre, juste un dépôt vide.
 
-Ensuite, suivez les instructions de GitHub pour un dépôt existant à partir de la ligne de commande. Copiez et collez les commandes que GitHub vous donne.
-Ces commandes ajouteront le dépôt GitHub nouvellement créé en tant que "remote" à votre dépôt local, c'est-à-dire un autre clone du dépôt que Git connaît.
+Ensuite, suivez les instructions pour un dépôt existant à partir de la ligne de commande. Copiez et collez les commandes qui vous sont données.
+Ces commandes ajouteront le dépôt nouvellement créé en tant que "remote" à votre dépôt local, c'est-à-dire un autre clone du dépôt que Git connaît.
 Puisque ce sera le seul remote, ce sera aussi le remote par défaut. Le remote par défaut est traditionnellement nommé `origin`.
-Les commandes fournies par GitHub pousseront également vos modifications vers ce serveur distant.
-Une fois les commandes exécutées, vous pouvez rafraîchir la page de votre dépôt GitHub et voir vos fichiers.
+Les commandes données pousseront également vos modifications vers ce serveur distant.
+Une fois les commandes exécutées, vous pouvez rafraîchir la page de votre dépôt et voir vos fichiers.
 
 Maintenant, faites un changement dans votre `hello.txt`, suivez le changement, et livrez-le.
-Vous pouvez ensuite synchroniser le commit avec le clone du dépôt GitHub :
+Vous pouvez ensuite synchroniser le commit avec le clone du dépôt en ligne :
 
 ```sh
 $ git push
 ```
 
-Vous pouvez également récupérer les changements sur GitHub :
+Vous pouvez également récupérer les changements du dépôt en ligne :
 
 ```sh
 $ git pull
 ```
 
 Cette commande n'a ici aucun effet, puisque personne d'autre n'utilise ce dépôt.
-Dans un scénario réel, d'autres développeurs disposeraient également d'un clone du dépôt sur leur machine et utiliseraient GitHub comme leur serveur distant par défaut.
+Dans un scénario réel, d'autres développeurs disposeraient également d'un clone du dépôt sur leur machine et utiliseraient le même serveur distant par défaut.
 Ils apportaient leurs modifications et vous les récupéreriez.
 
 Il est important de noter que `git pull` ne synchronise que la branche courante.
@@ -493,38 +499,38 @@ Vous pouvez également ignorer des répertoires entiers.
 Notez que cela ne fonctionne que pour les fichiers qui n'ont pas encore été livrés au dépôt.
 Si vous avez déjà fait un commit dans lequel `password.txt` existe, ajouter son nom à `.gitignore` n'ignorera que les changements futurs, pas ceux passés.
 Si vous poussez accidentellement sur un dépôt public un commit avec un fichier contenant un mot de passe, vous devez supposer que le mot de passe est compromis et le changer immédiatement.
-Il existe des robots qui analysent GitHub à la recherche de mots de passe qui ont été accidentellement inclus dans un commit,
+Il existe des robots qui analysent les dépôts publics à la recherche de mots de passe qui ont été accidentellement inclus dans un commit,
 et ils trouveront votre mot de passe si vous le mettez dans un dépôt public, même pendant quelques secondes.
 
 Maintenant que vous avez vu les bases de Git, il est temps de contribuer à un projet existant !
-Vous le ferez par le biais d'une _pull request_, qui est une demande adressée aux responsables d'un projet existant pour qu'ils intègrent vos modifications dans leur projet.
-Il s'agit d'un concept GitHub, car du point de vue de Git, il s'agit simplement de synchroniser les modifications entre les clones d'un dépôt.
+Vous le ferez par le biais d'une _pull request_ (terminologie GitHub) / _merge request_ (terminologie GitLab), qui est une demande adressée aux responsables d'un projet existant pour qu'ils intègrent vos modifications dans leur projet.
+Du point de vue de Git, il s'agit simplement de synchroniser les modifications entre les clones d'un dépôt.
 
-Allez sur <https://github.com/sweng-example/hello> et cliquez sur le bouton "Fork".
-Un _fork_ est un clone du dépôt sous votre propre nom d'utilisateur GitHub,
-dont vous avez besoin ici parce que vous n'avez pas d'accès en écriture à `sweng-example/hello` et que vous ne pouvez donc pas y apporter de modifications.
+Allez sur <https://gitlab.epfl.ch/solal.pirelli/hello> (pour l'EPFL) ou <https://github.com/sweng-example/hello> (pour les autres) et cliquez sur le bouton "Fork".
+Un _fork_ est un clone du dépôt sous votre propre nom d'utilisateur,
+dont vous avez besoin ici parce que vous n'avez pas d'accès en écriture au dépôt original et que vous ne pouvez donc pas y apporter de modifications.
 Au lieu de cela, vous allez pousser les changements vers votre fork, sur lequel vous avez un accès en écriture,
-et ensuite demander aux mainteneurs de `sweng-example/hello` d'accepter le changement.
+et ensuite demander aux mainteneurs du dépôt original d'accepter le changement.
 Vous pouvez également créer des branches à l'intérieur d'un fork, car un fork est simplement un autre clone du dépôt.
 En règle générale, si vous êtes un collaborateur d'un projet, vous utiliserez une branche dans le dépôt principal du projet, tandis que si vous êtes une personne extérieure souhaitant proposer une modification, vous créerez d'abord un fork.
 
-Maintenant que vous avez une version forkée du projet sur GitHub, cliquez sur le bouton "Code" et copiez l'URL SSH, qui devrait commencer par `git@github.com:`.
+Maintenant que vous avez une version forkée du projet, cliquez sur le bouton "Code" et copiez l'URL SSH, qui devrait commencer par `git@`.
 Ensuite, demandez à Git de créer un clone local de votre fork, bien que vous deviez d'abord retourner dans votre répertoire d'origine, car la création d'un dépôt dans un dépôt pose des problèmes :
 
 ```sh
 $ cd ~
-$ git clone git@github.com :...
+$ git clone git@...
 ```
 
 Git va cloner votre fork localement, ce qui vous permettra d'effectuer une modification, de la valider et de la pousser vers votre fork.
-Une fois que c'est fait, si vous allez sur votre fork sur GitHub,
+Une fois que c'est fait, si vous allez sur votre fork,
 il devrait y avoir une bannière au-dessus du code vous indiquant que la branche de votre fork est en avance d'un commit par rapport à la branche principale du dépôt original.
-Cliquez sur le bouton "Contribute" et sur le bouton "Open pull request" qui s'affiche, puis confirmez que vous voulez ouvrir une pull request, et écrivez une description pour celle-ci.
+Utilisez cette bannière pour confirmer que vous voulez ouvrir une pull/merge request, et écrivez une description pour celle-ci.
 
 Félicitations, vous avez apporté votre première contribution à un projet open source !
 
 La meilleure façon de s'habituer à Git est de l'utiliser souvent. Utilisez Git même pour vos propres projets, même si vous n'avez pas l'intention d'utiliser des branches.
-Vous pouvez utiliser des dépôts privés sur GitHub comme sauvegardes, de sorte que même si votre ordinateur portable tombe en panne, vous ne perdrez pas votre code.
+Vous pouvez utiliser des dépôts privés sur GitHub, GitLab, etc. comme sauvegardes, de sorte que même si votre ordinateur tombe en panne, vous ne perdrez pas votre code.
 
 Il existe de nombreuses fonctionnalités avancées dans Git qui peuvent être utiles dans certains cas, comme `bisect`, `blame`, `cherry-pick`, `stash`, et bien d'autres.
 Lisez la [documentation officielle](https://git-scm.com/docs/) ou trouvez des tutoriels avancés en ligne pour en savoir plus si vous êtes curieux !
@@ -688,7 +694,34 @@ Le développeur devrait corriger le code pour que le bouton "Non" soit toujours 
 ---
 
 #### Exercice : Ajouter l'intégration continue
-Retournez au dépôt GitHub que vous avez créé, et ajoutez l'intégration continue !
+Retournez au dépôt en ligne que vous avez créé, et ajoutez l'intégration continue !
+
+Les instructions différent selon le site que vous utilisez.
+
+#### GitLab CI/CD
+
+GitLab inclut un service d'intégration continue appelé GitLab CI/CD, qui est gratuit pour une utilisation de base.
+Voici un fichier de base que vous pouvez utiliser, qui doit être nommé `.gitlab-ci.yml` :
+```yaml
+stages:
+  - hello
+
+hello:
+  stage: hello
+  script:
+    - echo "Hello World"
+```
+Après avoir ajouté ce fichier au dépôt GitLab et attendu quelques secondes, vous devriez voir un cercle jaune à côté du commit indiquant que votre action est en cours d'exécution,
+que vous pouvez également voir dans l'onglet "Build > Pipelines" du dépôt.
+
+...**cependant, cette action ne s'exécutera pas car l'instance GitLab de l'EPFL n'a pas de "runners" disponibles pour nous**.
+
+Il s'agit d'une action très basique qui se contente de cloner le dépôt et d'imprimer du texte. Dans un scénario réel, vous devriez au moins invoquer un système de build.
+GitLab CI/CD est puissant, comme vous pouvez le lire sur [la documentation](https://docs.gitlab.com/ci/).
+
+
+#### GitHub Actions
+
 GitHub inclut un service d'intégration continue appelé GitHub Actions, qui est gratuit pour une utilisation de base.
 Voici un fichier de base que vous pouvez utiliser, qui doit être nommé `.github/workflows/example.yml` :
 ```yaml
@@ -703,7 +736,7 @@ jobs:
 Après avoir ajouté ce fichier au dépôt GitHub et attendu quelques secondes, vous devriez voir un cercle jaune à côté du commit indiquant que votre action est en cours d'exécution,
 que vous pouvez également voir dans l'onglet "Actions" du dépôt.
 Il s'agit d'une action très basique qui se contente de cloner le dépôt et d'imprimer du texte. Dans un scénario réel, vous devriez au moins invoquer un système de build.
-GitHub Actions est assez puissant, comme vous pouvez le lire sur [la documentation de GitHub Actions](https://docs.github.com/en/actions).
+GitHub Actions est puissant, comme vous pouvez le lire sur [la documentation](https://docs.github.com/en/actions).
 
 ---
 
