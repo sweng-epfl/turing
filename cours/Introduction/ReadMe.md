@@ -24,12 +24,12 @@ C'est là que les logiciels entrent en jeu : nous pouvons désormais écrire un 
 Soit dit en passant, la société qui a fabriqué la machine à compter les points survit encore aujourd'hui sous le nom d'IBM !
 
 De nos jours, les logiciels sont omniprésents, et savoir écrire et maintenir des logiciels est donc une compétence très prisée.
-Les voitures contiennent des millions de lignes de code, même les "vieilles" qui fonctionnent au gaz plutôt qu'à l'électricité.
+Les voitures contiennent des millions de lignes de code, même les "vieilles" qui fonctionnent à gaz plutôt qu'à l'électricité.
 Même les appareils électroménagers tels que les machines à laver ou les barbecues utilisent des logiciels suffisamment complexes pour nécessiter des mises à jour régulières afin de corriger les bugs !
 
 Au début des années 2000, les [entreprises ayant le plus de capitalisation de la planète](https://en.wikipedia.org/wiki/List_of_public_corporations_by_market_capitalization)
 étaient principalement actives dans les secteurs du gaz, du pétrole, de la santé, de la banque et d'autres services de ce type.
-Aujourd'hui, c'est l'inverse : seule une petite fraction des entreprises les plus précieuses s'occupe de services spécifiques tels que la santé,
+Aujourd'hui, c'est l'inverse : seule une petite fraction des entreprises avec le plus de valeur s'occupe de services spécifiques tels que la santé,
 et la grande majorité d'entre elles s'occupent de logiciels, de matériel ou des deux.
 
 Les logiciels sont également un outil essentiel pour la science.
