@@ -207,3 +207,94 @@ p = Person("Alice", 7)
 print(p.name)
 ```
 Nous ne parlerons pas plus de `dataclass`, mais c'est bon à savoir.
+
+
+## Comment utiliser les objets en pratique ?
+
+Nous venons de voir comment écrire des classes et utiliser l'héritage et les attributs en Python, mais qu'en est-il de la pratique ? Comment choisir ce qui doit être public ou privé, ce qui doit hériter d'une autre classe... ?
+
+Déjà, concernant la distinction public/privé, préférez les méthodes privées et attributs privés par défaut.
+Il est facile de changer dans la direction "privé => public", car personne d'autre ne peut utiliser les choses privées, donc donner au reste du code la possibilité d'utiliser quelque chose qui était auparavant privé ne pose pas de problème.
+Mais l'inverse n'est pas vrai : changer dans la direction "public => privé" peut causer beaucoup de problèmes, car tout le code qui utilisait ce qui était avant public et est maintenant privé ne fonctionne plus.
+Si vous vous rendez compte qu'une méthode n'aurait pas du être publique car elle permet de casser l'encapsulation fournie par sa classe, par exemple, vous devez changer tout le code hors de la classe qui l'utilise.
+Dans le cas où votre code est utilisé par d'autres, par exemple si vous avez publié votre code sur un dépôt de paquets afin que d'autres puissent l'utiliser, les utilisateurs ne seront pas content que leur code ne marche plus avec votre nouvelle version qui rend une méthode privée alors qu'elle était publique.
+
+Notons aussi que le fait qu'une classe a des méthodes publiques et privées ne signifie pas qu'on peut toujours la remplacer par une implémentation différente qui fournisse "la même chose", à cause des performances.
+Par exemple, une carte de la Terre implémentée avec la [projection de Mercator](https://fr.wikipedia.org/wiki/Projection_de_Mercator) peut très facilement fournir l'opération "quel angle dois-je utiliser pour naviguer entre deux points",
+car conserver les angles est justement le but de cette projection.
+Vous pourriez changer l'implémentation de la carte pour utiliser une autre projection, mais si calculer un angle est beaucoup plus lent avec votre projection différente, l'implémentation ne sera pas forcément utilisable en pratique avec le niveau de performance attendu.
+
+#### Exercice
+Vous implémentez un réseau social et avez besoin de stocker des images.
+Pour l'instant, vous stockez ces images sur le disque local de votre machine.
+
+Lesquelles de ces méthodes devraient être préfixées d'un `_` pour indiquer qu'elles sont privées ?
+```python
+class PictureStorageOnDisk:
+  def get_picture(self, id): ...
+  def get_file_name(self, id): ...
+  def get_all_pictures(self): ...
+```
+
+<details>
+<summary>Solution (cliquez pour développer)</summary>
+<p>
+
+`get_picture` est le but principal de la classe donc doit rester public.
+
+`get_file_name` est un détail d'implémentation. Si vous stockiez les fichiers dans une base de données, ou sur un site externe, le concept même de "nom de fichier" n'aurait pas de sens, cette méthode doit donc être privée.
+
+`get_all_pictures` est discutable. Cela est potentiellement utile pour le reste de l'application, mais selon la manière dont les images sont stockées, cette opération pourrait être extrêmement inefficace, par exemple en téléchargeant des milliers d'images.
+Il vaut mieux la laisser en privé jusqu'à ce qu'il y ait un vrai besoin.
+
+</p>
+</details>
+
+---
+
+Il est facile de céder à la tentation du "juste au cas où..." et de rendre ses interfaces extrêmement générales.
+Le stockage d'images de l'exercice que vous venez de faire pourrait être un stockage de "données" prenant non seulement leur identifiant mais aussi leur type, un Booléen indiquant si un cache local doit être utilisé, et bien d'autres paramètres.
+En interne, c'est peut-être comme cela que ce stockage sera implémenté. Mais il vaut mieux garder une interface publique spécifique, qui facilite l'utilisation de la classe.
+
+Un autre choix que vous devez faire en écrivant des classes concerne l'héritage.
+Un chat "est un" animal, un participant à un évènement "est une" personne, un sponsor de cet évènement "est une" société.
+Par contre, un chat "a une" tête, un participant "a une" adresse email, un sponsor "a un" compte bancaire.
+
+Il est donc normal d'écrire `class Chat(Animal)`, mais pas `class Chat(Tête)`. Ce n'est pas parce qu'on peut utiliser la tête d'un chat pour le caresser qu'un chat est plus généralement une tête.
+L'exemple du sponsor est flagrant : oui, un sponsor vous fournit de l'argent pour votre évènement, mais vous ne pouvez pas créer un compte chez votre sponsor pour y verser ou y retirer de l'argent à votre guise !
+
+Gardez à l'esprit le [principe de substitution de Liskov](https://fr.wikipedia.org/wiki/Principe_de_substitution_de_Liskov), nommé d'après [Barbara Liskov](https://fr.wikipedia.org/wiki/Barbara_Liskov),
+informaticienne et pionnière de l'abstraction et de l'encapsulation dans les langages de programmation.
+Si `X` est un `Y`, alors partout où l'on peut utiliser un `Y`, on peut également utiliser un `X`.
+On peut donc utiliser un `Chat` partout où l'on peut utiliser un `Animal` en général. Mais on ne peut pas utiliser un `Participant` partout où l'on peut utiliser une `AdresseEmail`. Les participants ne veulent peut-être même pas que vous connaissiez leur adresse !
+
+Un exemple connu est celui de la classe `Stack` en Java, qui est censé représenter une "pile" où l'on peut déposer des objets en mode "premier arrivé, dernier sorti". Si vous déposez `1, 2, 3`, vous retirez `3, 2, 1` dans l'ordre.
+En interne, cette classe pourrait utiliser une représentation similaire à celle d'une "liste" comme la `list` en Python.
+Mais comme Java est un des premiers langages orientés objet à être devenu populaire, sa librairie standard contient des erreurs de débutant.
+Dans ce cas-ci, `Stack` _hérite_ de la classe pour les listes au lieu d'en _contenir_  une. Donc n'importe qui peut ajouter ou supprimer des objets à n'importe quel index de la pile, ce qui détruit l'encapsulation.
+
+Enfin, gardez à l'esprit que les "types de données" en théorie ne correspondent pas forcément aux types que vous pouvez utiliser en pratique.
+Par exemple, un `âge` peut être un `int` en Python, mais cela ne veut pas pour autant dire que `-500` est un âge !
+Quand vous réfléchissez au types de vos données, souvenez-vous que vous pouvez être plus précis dans la documentation et avec du code qui vérifie les valeurs que les types généraux que vous avez à disposition.
+Certains langages vous permettent d'ailleurs d'être plus précis que Python et de définir vous-même des types comme "les entiers de 0 à 9 inclus".
+
+Les types de données sont parfois définis en fonction d'autres types. "Une liste", implicitement, c'est une liste de quelque chose, par exemple une `list[int]`, une `list[str]`, ou même une `list[list[int]]`.
+Cela mène à une intersection intéressante avec l'héritage.
+Sachant qu'un `Chat` est un `Animal`, est-ce qu'une `Image[Chat]` est une `Image[Animal]` ? Oui, clairement.
+Est-ce que de la `NourriturePour[Chat]` est plus généralement de la `NourriturePour[Animal]` ? Non ! Tous les animaux ne peuvent pas manger tout ce que les chats peuvent manger.
+Par contre, si vous avez de la `NourriturePour[Animal]` en général, c'est de la `NourriturePour[Chat]` puisque si quelque chose convient à tous les animaux, cela convient clairement aux chats.
+
+Et nos listes ? Est-ce qu'une `list[Chat]` est une `list[Animal]` ?
+Si c'était le cas, on pourrait écrire du code comme cela :
+```python
+def add_tiger(lst: list[Animal]): ...
+
+lst = [giraffe1, giraffe2]
+add_tiger(lst) # oups, on ajoute un tigre dans une liste de girafes, pauvres girafes
+```
+Est-ce donc l'inverse ? Une `list[Animal]` est-elle une `list[Chat]` ? Non plus, si on retire un élément de la liste, c'est un `Animal` mais pas forcément un `Chat`. Il n'y a donc aucune relation d'héritage entre `list[Chat]` et `list[Animal]`.
+
+Formellement, on parle de "variance" :
+- La **covariance**, c'est l'usage en sortie : une image de chat est une image d'animal
+- La **contravariance**, c'est l'usage en entrée : la nourriture pour animal est de la nourriture pour chat
+- L'**invariance**, c'est ni l'un ni l'autre : une liste de chats et une liste d'animaux ne peuvent pas être utilisées l'une pour l'autre
