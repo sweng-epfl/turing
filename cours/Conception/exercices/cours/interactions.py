@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
-# Exercice : Déplacez le code interagissant avec l'utilisateur
-#            dans une nouvelle classe appelée UI.
-#            Après vos modifications, le code hors de la classe
-#            ne devrait plus avoir de `print`/`input`,
-#            et n'avoir besoin que de créer un objet UI()
-#            et d'appeler des méthodes dessus pour définir des variables,
-#            elle-mêmes passées à des méthodes appelées sur l'UI.
+# Exercice 1 : Déplacez le code interagissant avec l'utilisateur
+#              dans une nouvelle classe appelée UI.
+#              Après vos modifications, le code hors de la classe
+#              ne devrait plus avoir de `print`/`input`,
+#              et n'avoir besoin que de créer un objet UI()
+#              et d'appeler des méthodes dessus pour définir des variables,
+#              elle-mêmes passées à des méthodes appelées sur l'UI.
 
 print('Bonjour !')
 
@@ -24,3 +24,12 @@ while not hobby:
     hobby = input()
 
 print(hobby + ', quelle bonne idée !')
+
+
+
+
+
+# Exercice 2 : Ajoutez un paramètre de constructeur à votre classe UI
+#              pour qu'elle fonctionne en mode "silencieux",
+#              c'est-à-dire aucun "print" sur la console
+#              (typiquement une option offerte par les programmes qui peuvent être utilisé dans des scripts)
