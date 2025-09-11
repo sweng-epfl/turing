@@ -17,7 +17,7 @@ Les [solutions](solutions/) sont disponibles.
 Il y a aussi des [exercices pendant le cours](cours/).
 
 
-**Idées pour projets** :
+**Idées pour vos propres projets** :
 
 - Écrivez des tests unitaires pour les fonctions de votre code
 - Faites évoluer votre code pour injecter des dépendances comme un client HTTP afin de pouvoir tester vos modules
