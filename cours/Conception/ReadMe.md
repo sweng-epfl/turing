@@ -611,3 +611,96 @@ Mais les autochtones ne le savaient pas et essayaient de faire atterrir des avio
 Certaines de ces croyances ont perduré plus longtemps qu'elles n'auraient dû, et leur équivalent moderne en programmation sont les ingénieurs qui conçoivent leur système
 "parce que certaines grandes entreprises, comme Google ou Microsoft, le font de cette façon", sans savoir ni comprendre pourquoi ces grandes entreprises le font ainsi.
 En général, les grands systèmes des grandes entreprises ont des contraintes qui ne s'appliquent pas à la grande majorité des systèmes, comme le traitement de milliers de requêtes par seconde ou la nécessité de fournir des garanties de disponibilité extrêmes.
+
+
+## Comment atténuer l'impact des défauts ?
+
+Que doit-il se passer lorsqu'une partie d'un système rencontre un problème ?
+
+[Margaret Hamilton](https://fr.wikipedia.org/wiki/Margaret_Hamilton_(scientifique)), 
+qui a écrit avec son équipe le logiciel permettant de mettre des vaisseaux spatiaux en orbite et d'envoyer des hommes sur la Lune,
+a raconté [dans une conférence](https://www.youtube.com/watch?v=ZbVOF0Uk5lU) comment elle a tenté de persuader les responsables 
+d'ajouter une fonctionnalité de sécurité à un vaisseau spatial.
+Un jour, elle avait emmené sa fille au travail, et celle-ci avait essayé le simulateur de vaisseau spatial. 
+À sa surprise, sa fille avait réussi à faire crasher le logiciel fonctionnant dans le simulateur.
+Le logiciel n'était pas capable de supporter le lancement d'une opération alors que le vaisseau spatial était censé se trouver dans une phase de vol complètement différente.
+Hamilton a tenté de convaincre ses responsables que le logiciel devait être capable de supporter de telles erreurs, mais comme elle le rappelle :
+"(les responsables) ont répondu : 'Cela n'arrivera jamais, les astronautes sont bien entraînés, ils ne font pas d'erreurs'... lors de la mission suivante, Apollo 8, c'est exactement ce qui s'est produit... il a fallu des heures pour récupérer (les données)"
+
+L'absence de vérification de cette condition était une erreur, c'est-à-dire que l'équipe qui a programmé le logiciel a choisi de ne pas tenir compte d'un problème qui pouvait se produire dans la pratique.
+D'autres types d'erreurs consistent à oublier de traiter un cas de défaillance ou à écrire un code qui ne fait pas ce que le programmeur pense qu'il fait.
+
+Les erreurs provoquent des défauts dans le système, qui peuvent être déclenchés par des entrées externes, comme un astronaute appuyant sur le mauvais bouton.
+Si les défauts ne sont pas traités, ils provoquent des échec, ce que nous voulons éviter.
+
+Les erreurs sont inévitables dans tout système de grande envergure, car les systèmes impliquent des humains et les humains sont faillibles. "Ne faites pas d'erreurs" n'est pas une solution réaliste.
+Il est même difficile d'envisager tous les cas de défaillance possibles ; pensez au "[Chat provoquant le blocage de l'écran de connexion](https://bugs.launchpad.net/ubuntu/+source/unity-greeter/+bug/1538615)" dans Ubuntu.
+Qui aurait pu imaginer qu'un utilisateur non malveillant puisse saisir des milliers de caractères dans un champ de saisie de nom d'utilisateur ?
+
+Pour empêcher les échecs, il faut donc empêcher les défauts de se propager dans le système, c'est-à-dire atténuer leur impact.
+Nous verrons quatre façons d'y parvenir, toutes basées sur des modules : isoler, réparer, réessayer et remplacer.
+
+L'effort à fournir pour tolérer les défauts dépend de l'enjeu.
+Un petit script que vous avez écrit vous-même pour récupérer des dessins animés doit être tolérant aux erreurs réseau temporaires, mais ne nécessite pas de techniques de récupération avancées.
+En revanche, la [barrière sur la Tamise](https://www.youtube.com/watch?v=eY-XHAoVEeU) qui empêche les inondations massives doit être résistante à de nombreux défauts possibles.
+
+### Isoler
+
+Au lieu de faire planter l'ensemble d'un logiciel, il est préférable d'isoler le défaut et de ne faire planter qu'un seul module, aussi petit et proche que possible de la source du défaut.
+Par exemple, les navigateurs Web modernes isolent chaque onglet dans son propre module, et si le site Web à l'intérieur de l'onglet pose un problème, seul cet onglet doit planter, et non l'ensemble du navigateur.
+De même, les systèmes d'exploitation isolent chaque programme de manière à ce que seul le programme plante s'il présente un défaut, et non l'ensemble du système d'exploitation.
+
+Cependant, l'isolation ne doit être effectuée que si le reste du programme peut fonctionner raisonnablement sans le module défaillant.
+Par exemple, si le module responsable du dessin de l'interface globale du navigateur plante, le reste du navigateur ne peut pas fonctionner.
+En revanche, le plantage d'un seul onglet du navigateur est acceptable, car l'utilisateur peut toujours utiliser les autres onglets.
+
+### Réparer
+
+Il arrive parfois qu'un module passe dans un état inattendu en raison d'un défaut. Il est alors possible de le "réparer" en le ramenant à un état connu.
+Cela ne signifie pas le faire passer de l'état inattendu à un autre état quelconque, 
+car le module ne sait même pas où il se trouve, mais remplacer l'intégralité de l'état du module par un état "de secours" spécifique dont on sait qu'il fonctionne.
+Un exemple intéressant de cela est [la salle "secrète"](https://zelda-archive.fandom.com/wiki/Top_Secret_Room) dans le jeu vidéo _The Legend of Zelda: A Link to the Past_.
+Si le joueur parvient à mettre le jeu dans un état inconnu, par exemple en passant trop rapidement d'une zone à l'autre de la carte pour que le jeu puisse suivre,
+le jeu reconnaît qu'il est confus et place le joueur dans une pièce spéciale, en faisant comme si c'était intentionnel et que le joueur avait trouvé une zone secrète.
+
+Une forme grossière de réparation consiste à "l'éteindre et le rallumer", par exemple en redémarrant un programme ou en redémarrant le système d'exploitation.
+L'état immédiatement après le démarrage est connu pour fonctionner, mais cela ne peut être caché aux utilisateurs et constitue plutôt un moyen de contourner un défaut.
+
+Cependant, ne procédez à une réparation que si l'état d'un module peut être entièrement restauré à un état connu pour fonctionner.
+Réparer seulement une partie d'un module risque de créer un monstre de Frankenstein qui ne fera qu'aggraver le problème.
+
+### Réessayer
+
+Tous les défauts ne sont pas permanentes.
+Certains défauts proviennent de causes externes qui peuvent se résoudre sans votre intervention, et il est donc souvent judicieux de réessayer.
+Par exemple, si la connexion Internet d'un utilisateur tombe en panne, toute requête Web effectuée par votre application échouera.
+Mais il est probable que la connexion soit rapidement rétablie, par exemple
+parce que l'utilisateur se trouvait temporairement dans un endroit où la connectivité mobile était faible, comme un tunnel.
+Ainsi, réessayer plusieurs fois avant d'abandonner évite d'afficher des échecs inutiles à l'utilisateur.
+Le nombre de tentatives et le délai d'attente avant de réessayer dépendent de vous, du système et du contexte.
+
+Cependant, ne réessayez que si la requête est _idempotente_, c'est-à-dire si le fait de la répéter plusieurs fois a le même effet que de la faire une seule fois.
+Par exemple, retirer de l'argent d'un compte bancaire n'est pas une requête idempotente.
+Si vous réessayez parce que vous n'avez pas obtenu de réponse, mais que la requête a en fait atteint le serveur, l'argent sera retiré deux fois.
+
+Vous ne devez également réessayer que lorsque vous rencontrez des problèmes qui sont récupérables, c'est-à-dire pour lesquels réessayer a une chance de réussir, car ils proviennent de circonstances indépendantes de votre volonté qui pourraient se résoudre d'elles-mêmes.
+Par exemple, "pas d'Internet" est récupérable, tout comme "l'imprimante démarre et n'est pas encore prête".
+En revanche, des problèmes tels que "le nom d'utilisateur souhaité est déjà pris" ou "le code contient un bug qui divise par zéro" ne sont pas récupérables, car réessayer mènera au même problème.
+
+### Remplacer
+
+Il existe parfois plusieurs façons d'effectuer une tâche, et certaines d'entre elles peuvent servir de rechange, en remplaçant le module principal en cas de problème.
+Par exemple, si un lecteur d'empreintes digitales ne parvient pas à reconnaître le doigt d'un utilisateur parce que celui-ci est trop humide, un système d'authentification pourrait demander un mot de passe à la place.
+
+Cependant, ne remplacez que si vous disposez d'une alternative aussi robuste et testée que l'originale.
+Le module "de rechange" ne doit pas être un ancien code qui n'a pas été exécuté depuis des années, mais doit être traité avec le même soin et le même niveau de qualité que le module principal.
+
+
+## Résumé
+
+Dans ce cours, vous avez appris :
+- La programmation orientée objet : classes, méthodes, héritage vs composition, co/contra/invariance
+- L'abstraction et la modularité : régularité, groupes, couches, niveaux, "fuites" de niveau
+- Atténuer l’impact des défauts : isoler, réparer, réessayer, remplacer
+
+Vous pouvez maintenant consulter les [exercices](exercices/) !
