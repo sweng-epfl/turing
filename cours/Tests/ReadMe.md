@@ -158,6 +158,8 @@ class TestRaises(unittest.TestCase):
 
 Si la fonction ne lève pas d'exception, ou lève une exception d'un autre type, le test échoue.
 
+Pour voir plus de méthodes de test, consultez [la documentation de `unittest`](https://docs.python.org/3/library/unittest.html).
+
 ---
 #### Exercice
 C'est à vous de jouer ! Ouvrez [le projet d'exercice du cours](exercices/cours) et testez `fonctions.py`.

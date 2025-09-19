@@ -5,11 +5,13 @@ Créez un fichier avec vos tests, p.ex., `my_tests.py`, qui commencera par :
 ```python
 import unittest
 
+import fonctions # ou un autre fichier à tester, qui soit **dans le même dossier** que ce fichier de tests
+
 # idéalement avec un meilleur nom que "MyTests" :-)
 class MyTests(unittest.TestCase):
     # Le nom des méthodes doit commencer par "test_"
     def test_example(self):
-        self.assertEqual(2, 1 + 1)
+        self.assertEqual(1, fonctions.fibonacci(1))
 
     def test_example_raises(self):
         with self.assertRaises(ZeroDivisionError):
