@@ -4,3 +4,10 @@
 
 class PeopleCounter():
     pass # TODO
+
+# Par exemple :
+#    def __init__(self, max):
+#        self.counter = 0
+#        self.max = max
+#    def increment(self):
+#        ...

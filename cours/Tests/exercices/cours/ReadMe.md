@@ -1,18 +1,20 @@
 # Exercices pendant le cours
 
-Installez Hamcrest d'abord :
+Créez un fichier avec vos tests, p.ex., `my_tests.py`, qui commencera par :
 
-    python3 -m pip install pyhamcrest
+```python
+import unittest
 
-Puis créez un fichier avec vos tests, p.ex., `my_tests.py`, qui commencera par :
+# idéalement avec un meilleur nom que "MyTests" :-)
+class MyTests(unittest.TestCase):
+    # Le nom des méthodes doit commencer par "test_"
+    def test_example(self):
+        self.assertEqual(2, 1 + 1)
 
-    from unittest import TestCase
-    from hamcrest import *
-
-    # idéalement avec un meilleur nom que "MyTests" :-)
-    class MyTests(TestCase):
-        def test_example(self):
-            assert_that(1 + 1, equal_to(2))
+    def test_example_raises(self):
+        with self.assertRaises(ZeroDivisionError):
+            y = 1 / 0
+```
 
 Enfin, lancez les tests :
 

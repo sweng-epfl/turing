@@ -1,7 +1,6 @@
 # Exercice optionnel : Testez la méthode main, avec des "end-to-end" tests donc simulation de l'input/output au lieu d'injecter des dépendances
 
 from unittest import TestCase
-from hamcrest import *
 
 # permet de remplacer "input" par ce que l'on veut
 # (consultez la doc si vous souhaitez en savoir plus)

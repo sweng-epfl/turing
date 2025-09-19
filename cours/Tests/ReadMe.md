@@ -130,53 +130,44 @@ class TestsAdd(unittest.TestCase):
 `unittest` trouve toutes les classes héritant de `unittest.TestCase` et les exécute, nous libérant ainsi de la nécessité d'écrire le code pour le faire nous-mêmes,
 et lance des exceptions dont le message comprend la valeur "attendue" et la valeur "obtenue".
 
-...attendez, avons-nous fait cela correctement ? Aurions-nous dû mettre la valeur "attendue" en premier ? Il est difficile de s'en souvenir.
-Et même si nous faisons cette partie correctement, il est difficile de rendre les messages d'assertion utiles pour des tests tels que "cette liste doit être vide ou contenir `[1, 2]`".
-Nous pouvons écrire du code pour vérifier cela, mais si le test échoue, nous obtiendrons "`True` attendu, mais `False` obtenu", ce qui n'est pas utile.
-
-Au lieu de cela, utilisons [Hamcrest](https://github.com/hamcrest/PyHamcrest) pour écrire nos assertions en plus de `unittest` :
-```python
-from hamcrest import assert_that, equal_to
-import unittest
-class TestsAdd(unittest.TestCase):
-  def test_1plus1(self):
-    assert_that(add(1, 1), equal_to(2))
-```
-C'est beaucoup plus clair ! La partie `equal_to` est un "matcher" Hamcrest, qui décrit la valeur attendue.
-`equal_to` est le plus simple, il correspond à une seule valeur, mais nous pouvons en utiliser de plus sophistiqués :
-```python
-values = [...]
-assert_that(values,    any_of(empty(), contains(1, 2)))
-```
-
-Si cette assertion échoue, le message d'exception de Hamcrest indique "Expected : (an empty collection or a sequence containing `[<1>, <2>]`) but : was `<[42]>`".
+> [!TIP]
+> Vous pouvez utiliser [Hamcrest](https://github.com/hamcrest/PyHamcrest) pour écrire des assertions en plus de `unittest` afin de les rendre plus lisibles, surtout les messages d'erreur :
+> ```python
+> from hamcrest import assert_that, equal_to
+> import unittest
+> class TestsAdd(unittest.TestCase):
+>   def test_1plus1(self):
+>     assert_that(add(1, 1), equal_to(2))
+> ```
+> La partie `equal_to` est un "matcher" Hamcrest, qui décrit la valeur attendue.
+> `equal_to` est le plus simple, il correspond à une seule valeur, mais nous pouvons en utiliser de plus sophistiqués :
+> ```python
+> values = [...]
+> assert_that(values, any_of(empty(), contains(1, 2)))
+> ```
+> Si cette assertion échoue, le message d'exception de Hamcrest indique "Expected : (an empty collection or a sequence containing `[<1>, <2>]`) but : was `<[42]>`".
 
 Parfois, nous devons tester qu'un morceau de code "échoue" dans certaines circonstances, par exemple en validant correctement les arguments et en levant une exception si un argument a une valeur invalide.
-C'est à cela que servent `calling` et `raises` :
+C'est à cela que sert `assertRaises` :
 ```python
-def func(x, y): ...
-
-assert_that(
-  calling(func).with_args(x=1, y=2),
-  raises(ValueError)
-)
+class TestRaises(unittest.TestCase):
+  def test_raises(self):
+    with self.assertRaises(ZeroDivisionError):
+        y = 1 / 0
 ```
 
-Si la fonction ne lève pas d'exception, ou lève une exception d'un autre type, Hamcrest lèvera une exception pour indiquer que le test a échoué.
+Si la fonction ne lève pas d'exception, ou lève une exception d'un autre type, le test échoue.
 
 ---
 #### Exercice
 C'est à vous de jouer ! Ouvrez [le projet d'exercice du cours](exercices/cours) et testez `fonctions.py`.
 Commencez par tester des valeurs valides pour `fibonacci`, puis testez qu'il rejette les valeurs invalides.
-Pour `split` et `shuffle`, rappelez-vous que Hamcrest a beaucoup de matchers et a de la documentation.
 <details>
 <summary>Exemple de solution (cliquer pour développer)</summary>
 <p>
 
-Vous pouvez tester `fibonacci` en utilisant le matcheur `equal_to` dont nous avons parlé plus tôt pour des nombres tels que 1 et 10,
-et tester qu'il lève une exception pour les nombres inférieurs à `0` en utilisant `calling` et `raises`.
-
-Pour tester `split`, vous pourriez utiliser le matcheur `contains` de Hamcrest, et pour la fonction de mélange, vous pourriez utiliser `contains_inanyorder`.
+Vous pouvez tester `fibonacci` pour des nombres tels que 1 et 10,
+et tester qu'il lève une exception pour les nombres inférieurs à `0`.
 
 </p>
 </details>
