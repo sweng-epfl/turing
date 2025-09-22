@@ -40,7 +40,12 @@ Mais il est facile de modifier une variable globale de manière non prévue par 
 De plus, avec un éditeur de code, si vous écrivez `animal_` et que votre éditeur vous propose les 50 fonctions et variables commençant par ce nom,
 comment sauriez-vous lesquels vous devez utiliser et lesquels sont des détails d'implémentation ?
 
-À la place, on utilise des **objets** en déclarant une classe :
+L'idée principale derrière la solution est de grouper des fonctions et des variables dans des _objets_.
+Les fonctions sur un objet sont appelées des _méthodes_.
+Chaque méthode a accès à l'_instance_ de l'objet sur laquelle elle est appelée.
+Ainsi, un programme orienté objet crée des objets et appelle des méthodes dessus. Chaque appel peut potentiellement altérer l'état d'un objet, ce qui peut changer le comportement des méthodes appelées plus tard.
+
+On utilise des objets en déclarant leur classe :
 ```python
 class Animal:
   def describe(self): ...
@@ -48,17 +53,45 @@ class Animal:
   def name(self): ...
 ```
 On voit déjà qu'au lieu d'avoir des fonctions potentiellement éparses parmi le code source, elles sont toutes au même endroit,
-avec `self` indiquant l'"instance" de la classe sur laquelle elles opérent.
+avec `self` indiquant l'instance de la classe sur laquelle elles opérent.
 
-De plus, vous pouvez associer des champs à chaque instance afin de conserver un état lié à une instance,
-qui est typiquement initialisé dans un _constructeur_:
+> [!NOTE]
+> En Python comme dans d'autres langages, il faut distinguer le code qui définit des classes et des fonctions du code qui les exécute.
+> Par exemple :
+> ```python
+> class Thing:
+>   def method(self): ...
+>
+> def function(): ...
+>
+> print("Hello")
+> ```
+> Ce code définit une classe `Thing` avec une méthode `method`, ainsi qu'une fonction `function` qui ne fait pas partie d'une classe,
+> puis exécute `print("Hello")`. Le code à l'intérieur de `method` et de `fonction` n'est pas exécuté, puisqu'elles ne sont pas appelée.
+
+On crée une instance en utilisant le nom de la classe puis les arguments de création. Par défaut, il n'y a pas à donner d'argument :
+```python
+a = Animal() # crée une instance de Animal et la stocke dans la variable 'a'
+b = Animal() # de même, dans la variable 'b'
+
+print(a == b) # écrit False, ce sont des instances différentes !
+```
+
+Si nécessaire, on peut définir un _constructeur_ explicite qui peut prendre des paramètres :
+```python
+class Animal:
+  def __init__(self, name):
+    ...
+
+a = Animal("Chat") # invoque __init__ avec `self` étant la nouvelle instance et `name` étant `"Chat"`
+```
+
+Le constructeur peut par exemple stocker un paramètre comme _état_ de la classe :
 ```python
 class Animal:
   def __init__(self, kind):
     self.kind = kind
-```
-La méthode spéciale `__init__` est celle appelée lorsque vous créez une instance de la classe en utilisant son nom, et ici elle définit le champ `kind` de l'instance :
-```python
+
 a = Animal("Chat")
 print(a.kind) # Chat
 ```
@@ -76,21 +109,26 @@ Ce champ `_happy` peut ensuite être modifié dans des méthodes telles que "don
 Comme il commence par un souligné `_`, la convention en Python est que personne ne doit l'utiliser hors de la classe.
 Vous pouvez l'utiliser quand même si vous le voulez, mais c'est une mauvaise idée, et la présence d'un souligné `_` vous indique immédiatement que vous faites quelque chose de bizarre.
 
-De même, vous pouvez déclarer des méthodes privées :
+Pour utiliser l'état défini dans le constructeur, ainsi que modifier l'état d'un objet et agir en général, on définit des _méthodes_ :
+
+```
+class Animal:
+  def describe(self):
+    return "Un " + self.kind
+
+a = Animal("Chat")
+print(a.describe()) # Un Chat (`self` dans la méthode se réfère à `a` ici)
+```
+
+Par analogie avec l'état privé, vous pouvez déclarer des méthodes privées :
 ```python
 class Animal:
   def _increase_happiness(self):
     ...
 ```
 
-Dans d'autres langages de programmation, comme Java ou C#, le compilateur peut garantir que certains champs sont privés :
-```csharp
-class Animal {
-  private string _happy = true;
-}
-
-(new Animal())._happy // erreur, impossible de compiler ce code !
-```
+Il est également possible de déclarer des méthodes avec certains noms spéciaux, comme `__add__`, qui peuvent être utilisées comme des opérateurs, comme `+`.
+Référez vous à [la documentation](https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types).
 
 Nous avons vu comment déclarer une méthode pour un type de données, mais parfois vous avez besoin de plusieurs fonctions selon le type exact :
 ```python
@@ -133,19 +171,6 @@ class Dog(Animal):
 
 example(Dog()) # "Un chien est Un animal"
 ```
-
-Notez qu'en Python, contrairement aux des langages statiquement typés, il n'y a pas besoin d'avoir une super-classe commune pour utiliser deux classes de la même manière.
-Si un objet marche comme un canard et fait coin-coin comme un canard, c'est un canard, ce qui donne le nom "duck typing" en anglais.
-Par exemple :
-```python
-class Duck:
-  def quack(self): print("Quack")
-
-class Sheep:
-  def quack(self): print("Baaa???")
-```
-Un `Duck` peut `quack`, mais un `Sheep` a apparemment aussi appris à `quack`, donc toute méthode s'attendant à un `Duck` peut aussi utiliser un `Sheep`.
-Ce qui ne veut pas forcément dire que c'est une bonne idée !
 
 #### Exercice, partie 1
 Ouvrez le fichier [`interactions.py`](./cours/exercices/interactions.py).
@@ -192,6 +217,19 @@ Les fonctions dans ce fichier permettent d'afficher du texte et de demander du t
 Écrivez une classe `GraphicalUI` avec la même interface que `UI`, donc les mêmes noms de méthodes, pour que vous puissiez réutiliser la logique de la partie 1 tout en changeant la manière dont le code interagit avec l'utilisateur.
 
 ---
+
+Notez qu'en Python, contrairement aux des langages statiquement typés, il n'y a pas besoin d'avoir une super-classe commune pour utiliser deux classes de la même manière.
+Si un objet marche comme un canard et fait coin-coin comme un canard, c'est un canard, ce qui donne le nom "duck typing" en anglais.
+Par exemple :
+```python
+class Duck:
+  def quack(self): print("Quack")
+
+class Sheep:
+  def quack(self): print("Baaa???")
+```
+Un `Duck` peut `quack`, mais un `Sheep` a apparemment aussi appris à `quack`, donc toute méthode s'attendant à un `Duck` peut aussi utiliser un `Sheep`.
+Ce qui ne veut pas forcément dire que c'est une bonne idée !
 
 Enfin, avant de passer à la suite, une astuce Python : si vous avez besoin d'une classe juste pour grouper des valeurs, comme par exemple un nom et un age appartenant à une personne,
 vous pouvez utiliser `dataclass` pour ne pas avoir à écrire le constructeur `__init__` à la main :

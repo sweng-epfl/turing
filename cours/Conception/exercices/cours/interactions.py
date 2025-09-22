@@ -8,6 +8,19 @@
 #              et d'appeler des méthodes dessus pour définir des variables,
 #              elle-mêmes passées à des méthodes appelées sur l'UI.
 
+# Par exemple :
+# class UI:
+#     def __init__(self):
+#         ... le contenu du constructeur ici, vous pouvez ajouter des arguments ...
+#     def some_method(self, a):
+#         ... ceci est une méthode publique qui prend un argument 'a' ...
+#     def _some_other_method(self, x, y):
+#         ... ceci est une méthode privée qui prend deux arguments 'x' et 'y'
+#
+# ui = UI() # créer une UI
+# ui.some_method(42) # appeler une méthode
+
+
 print('Bonjour !')
 
 name = None
