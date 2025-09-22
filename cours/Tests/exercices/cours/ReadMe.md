@@ -18,6 +18,8 @@ class MyTests(unittest.TestCase):
             y = 1 / 0
 ```
 
+Pour voir plus de méthodes de test, consultez [la documentation de `unittest`](https://docs.python.org/3/library/unittest.html).
+
 Enfin, lancez les tests :
 
     python3 -m unittest my_tests.py
@@ -25,17 +27,22 @@ Enfin, lancez les tests :
 Vous pouvez aussi lancer les tests depuis un IDE, souvent via un clic droit sur le fichier de tests ou sur une fonction de test.
 
 
+# Couverture de code (plus tard)
+
 Pour la couverture de code, installez Coverage :
 
     python3 -m pip install coverage
+    # Si cela affiche une erreur "error: externally-managed-environment",
+    # soit installez via le gestionnaire de packages de votre OS,
+    # soit "python3 -m pip install --break-system-packages coverage"
 
 Puis utilisez-le en remplaçant `python3` par `coverage run` pour lancer les tests :
 
-    coverage run -m unittest my_tests.py
+    python3 -m coverage run -m unittest my_tests.py
 
 Enfin, affichez les résultats (en filtrant pour ne voir que les fichiers dans ce dossier, pas dans la librairie standard Python) :
 
-    coverage report --include=./*
+    python3 -m coverage report --include=./*
 
 Vous pouvez remplacer `report` par `html` pour générer un fichier HTML avec le code source annoté.
 
