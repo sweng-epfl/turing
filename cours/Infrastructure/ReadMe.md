@@ -1,6 +1,6 @@
 # Infrastructure
 
-**Prérequis** : Pour suivre cette partie, vous devez :
+**Prérequis 1 : Installation de Git** : Pour suivre cette partie, vous devez :
 > - Installer Git. Sous Windows, utilisez [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) car Git est principalement conçu pour Linux.
 >   Sur macOS, voir [la documentation de git] (https://git-scm.com/download/mac). Sous Linux, Git est peut-être déjà installé, ou utilisez la gestionnaire de paquets de votre distribution.
 >   Si vous avez installé Git avec succès, l'exécution de `git --version` dans la ligne de commande devrait afficher un numéro de version.
@@ -17,13 +17,18 @@
 > Si vous le souhaitez, vous pouvez définir le paramètre de configuration de Git `core.autocrlf` à `true` sur Windows et `input` sur Linux et macOS,
 > pour que Git convertisse automatiquement les fins de lignes à la manière d'Unix (`\n`) et les séparateurs de lignes à la manière de Windows (`\r\n`).
 
-**À l'EPFL**, nous utiliserons l'instance GitLab de l'EPFL, vous devez :
-> - Vous connecter à https://gitlab.epfl.ch avec votre compte EPFL
-> - Configurer une clé SSH pour GitLab en suivant [leur documentation](https://go.epfl.ch/turing-ssh)
+**Prérequis 2 : Création d'une clé SSH**:
+> En ligne de commande, exécutez `ssh-keygen` puis _appuyez sur Entrée 3x pour confirmer les questions, sans écrire d'autre texte_.
+> Ensuite, exécutez `ls ~/.ssh/*.pub`, ce qui devrait afficher une longue chaîne de caractères qui est votre clé publique SSH.
+> **Copiez** cette chaîne de caractères dans le presse-papiers.
 
-**Hors de l'EPFL**, vous pouvez utiliser GitHub, vous devez:
+**Prérequis 3 : À l'EPFL**, nous utiliserons l'instance GitLab de l'EPFL, vous devez :
+> - Vous connecter à https://gitlab.epfl.ch avec votre compte EPFL
+> - Dans les préférences de votre profil, ajoutez une clé SSH. Votre clé publique est celle que vous avez collé dans le presse papiers à l'étape précédente.
+
+**Prérequis 3 : Hors de l'EPFL**, vous pouvez utiliser GitHub, vous devez:
 > - Créer un compte GitHub (vous n'êtes pas obligé d'utiliser un compte GitHub existant, vous pouvez en créer un uniquement pour ce cours si vous le souhaitez)
-> - Configurer une clé SSH pour GitHub en suivant [leur documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+> - Dans les préférences de votre profil, ajoutez une clé SSH. Votre clé publique est celle que vous avez collé dans le presse papiers à l'étape précédente.
 
 
 Où stockez-vous votre code et comment le modifiez-vous ?
@@ -276,6 +281,18 @@ Comme il s'agit d'un petit commit qui ne nécessite pas beaucoup d'explications,
 
 ```sh
 $ git commit -m 'Say goodbye'
+```
+
+Vous pouvez afficher l'historique avec `log` :
+
+```sh
+$ git log
+```
+
+Le résultat est assez long, il peut être raccourci en une ligne par commit avec l'argument `--oneline` :
+
+```sh
+$ git log --oneline
 ```
 
 Essayons maintenant les branches, en créant une branche et en y basculant :
