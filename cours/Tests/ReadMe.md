@@ -162,7 +162,7 @@ Pour voir plus de méthodes de test, consultez [la documentation de `unittest`](
 
 ---
 #### Exercice
-C'est à vous de jouer ! Ouvrez [le projet d'exercice du cours](exercices/cours) et testez `fonctions.py`.
+C'est à vous de jouer ! Ouvrez [le dossier d'exercices pendant le cours](exercices/cours) et testez `fonctions.py`.
 Commencez par tester des valeurs valides pour `fibonacci`, puis testez qu'il rejette les valeurs invalides.
 <details>
 <summary>Exemple de solution (cliquer pour développer)</summary>
@@ -373,7 +373,7 @@ Une fois que vous aurez terminé, vous reviendrez vers le client, et ainsi de su
 
 ----
 #### Exercice
-A vous de jouer ! Dans [le projet d'exercices du cours](exercices/cours) vous trouverez `people_counter.py`, qui est documenté mais non implémenté.
+A vous de jouer ! Dans [le dossier d'exercices pendant le cours](exercices/cours) vous trouverez `people_counter.py`, qui est documenté mais non implémenté.
 Écrivez d'abord des tests, puis implémentez le code et corrigez votre code s'il ne passe pas les tests, à la manière TDD.
 Il faut d'abord réfléchir aux tests à écrire, puis les écrire et enfin implémenter le code.
 
@@ -494,7 +494,7 @@ Les implémentations de l'interface "client de données", comme Ethernet ou Wi-F
 
 ---
 #### Exercice
-A vous de jouer ! Dans [le projet d'exercices du cours](exercices/cours) vous trouverez `joker.py`, qui n'est pas facile à tester dans son état actuel.
+A vous de jouer ! Dans [le dossier d'exercices pendant le cours](exercices/cours) vous trouverez `joker.py`, qui n'est pas facile à tester dans son état actuel.
 Modifiez-le pour le rendre testable, écrivez des tests et modifiez `app.py` pour qu'il corresponde aux changements de `Joker` et préserve la fonctionnalité du programme original.
 Commencez par écrire une interface pour un client HTTP, implémentez-la en déplaçant le code existant, et utilisez-la dans `Joker`. Ensuite, ajoutez des tests.
 

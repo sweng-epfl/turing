@@ -463,7 +463,7 @@ Dans l'ensemble, par rapport au traitement par lots, le streaming réduit la lat
 
 ---
 #### Exercice
-Optimisons une application pour améliorer sa réactivité. Utilisez le fichier `tradeoffs.py` dans [le projet d'exercices pendant le cours](exercices/cours), en commençant par l'exécuter.
+Optimisons une application pour améliorer sa réactivité. Utilisez le fichier `tradeoffs.py` dans [le dossier d'exercices pendant le cours](exercices/cours), en commençant par l'exécuter.
 Comme vous pouvez le constater, l'affichage des résultats prend un certain temps.
 En examinant le code, vous pouvez voir qu'un lot entier de résultats est chargé en une seule fois.
 
