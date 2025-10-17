@@ -5,8 +5,8 @@ Ce module enseigne les bases du génie logiciel, afin de passer de _l'écriture 
 Ce dépôt contient tout le matériel de cours.
 Pour obtenir une copie de ce dépôt sur votre ordinateur, veuillez consulter les [instructions de clonage](documentation/Cloning.md)
 
-_Ce module est une traduction du [cours en anglais](https://github.com/sweng-epfl/public),_
-_qui était enseigné par le [Prof. George Candea](https://dslab.epfl.ch/people/candea/) et [Solal Pirelli](https://dslab.epfl.ch/people/pirelli/) à l'[EPFL](https://ic.epfl.ch)._
+_Ce module est une adaptation du [cours "Software Engineering" de l'EPFL](https://github.com/sweng-epfl/public),_
+_qui était enseigné par le [Prof. George Candea](https://dslab.epfl.ch/people/candea/) et [Solal Pirelli](https://dslab.epfl.ch/people/pirelli/)._
 
 
 ## Objectifs
@@ -31,16 +31,15 @@ Les quatre premières parties doivent être faites dans l'ordre, car ce sont des
 
 1. [Introduction](cours/Introduction/)
 2. [Infrastructure](cours/Infrastructure/)
-3. [Tests](cours/Tests/)
-4. Conception orientée objet (TBD)
+3. [Conception orientée objet](cours/Conception/)
+4. [Tests](cours/Tests/)
 
 Le reste peut être fait dans n'importe quel ordre, par exemple :
 
 - [Exigences](cours/Exigences/)
-- Performance (TBD)
 - [Débuggage](cours/Débuggage/)
-- Interface utilisateur (TBD)
-- Utilisation d'APIs (TBD)
+- [Performance](cours/Performance/)
+- [Interfaces graphiques et APIs](cours/GUIs et APIs/)
 - Travail en équipe (TBD)
 
 
