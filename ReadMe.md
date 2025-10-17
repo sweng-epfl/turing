@@ -39,8 +39,10 @@ Le reste peut être fait dans n'importe quel ordre, par exemple :
 - [Exigences](cours/Exigences/)
 - [Débuggage](cours/Débuggage/)
 - [Performance](cours/Performance/)
-- [Interfaces graphiques et APIs](cours/GUIs et APIs/)
+- [Interfaces graphiques et APIs](cours/GUIs-et-APIs/)
 - Travail en équipe (TBD)
+
+Il existe également un [résumé de "design patterns" courantes](DesignPatterns.md).
 
 
 ## Philosophie d'enseignement
