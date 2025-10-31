@@ -4,8 +4,11 @@
 
 Commencez par installer `pytest-benchmark` :
 
-    # idéalement on le ferait via le package manager du système ou un "virtual env", mais pour faire simple :
-    python3 -m pip install --break-system-packages pytest-benchmark
+    python3 -m pip install pytest-benchmark
+    # Si cela affiche une erreur "error: externally-managed-environment",
+    # soit installez via le gestionnaire de packages de votre OS,
+    # soit "python3 -m pip install --break-system-packages pytest-benchmark"
+    # (idem pour l'installation de flameprof dans la partie 2)
 
 Puis lancez `pytest` sur un fichier de benchmark :
 
@@ -17,7 +20,7 @@ Puis lancez `pytest` sur un fichier de benchmark :
 
 Le module de profiling est intégré à Python, mais il faut installer un module pour visualiser les résultats, comme `flameprof` :
 
-    python3 -m pip install --break-system-packages flameprof
+    python3 -m pip install flameprof
 
 Lancez le profiling en préfixant l'exécution par `-m cProfile -o prof.out` :
 
