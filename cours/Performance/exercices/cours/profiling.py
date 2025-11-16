@@ -3,7 +3,7 @@
 # On détecte donc la ligne qui contient deux fois "***"
 
 def read(path):
-    with open(path, "r") as file:
+    with open(path, "r", encoding="utf-8") as file:
         return file.read()
 
 def write(path, text):
