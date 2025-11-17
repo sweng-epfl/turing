@@ -151,7 +151,7 @@ Un exemple couramment utilisé pour illustrer les inconvénients de la méthode 
 Les travaux sur le système de bagages du nouvel aéroport de Denver ont commencé en juin 1991, la livraison étant prévue pour octobre 1993, date d'ouverture de l'aéroport.
 Après de nombreux retards dus au fait que le système automatisé de bagages n'était pas prêt, l'aéroport a ouvert ses portes en février 1995.
 Cependant, à ce moment-là, le système n'était utilisé que pour une partie des vols d'une seule compagnie aérienne, car il ne pouvait répondre à aucune des exigences initiales.
-Le développement a été entravé par des exigences trop complexes pour être mises en œuvre de manière réaliste et par des retours tardifs qui ont entraîné des changements majeurs, deux symptômes d'un développement des exigences isolé du reste du processus.
+Le développement a été entravé par des exigences trop complexes pour être mises en oeuvre de manière réaliste et par des retours tardifs qui ont entraîné des changements majeurs, deux symptômes d'un développement des exigences isolé du reste du processus.
 D'autres études de cas ont été rédigées, par exemple [les difficultés rencontrées par Ericsson](https://link.springer.com/chapter/10.1007/978-3-642-02152-7_29), là encore en raison de modifications tardives des exigences
 et de tests compromis pour respecter les délais du projet.
 
@@ -377,7 +377,7 @@ d'autres objectifs, tels que le transfert de connaissances, peuvent bénéficier
 Il y a un compromis évident : plus il y a de personnes qui relisent, plus il y a de commentaires et plus le transfert de connaissances est important, mais plus il faut de temps avant que le code puisse être mergé.
 
 Dans la pratique, il est courant de désigner un « propriétaire » du code, c'est-à-dire une personne responsable de la partie du code en cours de modification.
-Cette procédure peut être mise en œuvre à l'aide d'outils tels que [le fichier `CODEOWNERS` de GitHub](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners),
+Cette procédure peut être mise en oeuvre à l'aide d'outils tels que [le fichier `CODEOWNERS` de GitHub](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners),
 qui exige que les pull requests soient approuvées par les personnes désignées comme propriétaires du code.
 Il peut être utile de demander à d'autres personnes de relire le code afin d'apprendre et de fournir des commentaires mineurs, mais cela n'est généralement pas obligatoire.
 
@@ -462,8 +462,8 @@ Par exemple, vous pouvez laisser des commentaires tels que :
 Ces commentaires doivent être utilisés lorsqu'ils sont importants pour la relecture, mais pas pour les futurs responsables de la maintenance. Si quelque chose doit être laissé à l'intention des responsables de la maintenance, laissez-le plutôt sous forme de commentaire dans le code.
 
 Obtenez des commentaires dès le début, tout comme vous souhaitez obtenir rapidement les commentaires des utilisateurs dans le cadre d'un développement agile.
-Vous n'avez pas besoin d'attendre d'avoir entièrement mis en œuvre une tâche pour obtenir des commentaires sur la conception ou les cas de test.
-Il est tout à fait acceptable de demander à un collègue « _pouvez-vous jeter un œil [à la conception / aux tests / ...] ?_ ».
+Vous n'avez pas besoin d'attendre d'avoir entièrement mis en oeuvre une tâche pour obtenir des commentaires sur la conception ou les cas de test.
+Il est tout à fait acceptable de demander à un collègue « _pouvez-vous jeter un oeil [à la conception / aux tests / ...] ?_ ».
 En fait, des plateformes telles que GitHub ont un concept de pull requests « brouillons » ("_drafts_" en anglais) spécialement conçu à cet effet.
 Une pull request brouillon comporte une indication spéciale et ne peut pas être fusionnée, ce qui indique qu'elle a été ouverte uniquement pour obtenir des commentaires.
 

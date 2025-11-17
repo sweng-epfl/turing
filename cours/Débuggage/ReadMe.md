@@ -20,7 +20,7 @@ Après ce cours, vous devriez être en mesure de :
 
 ## Qu'est-ce qui rend le code lisible ?
 
-Jetez un coup d'œil à [planets.py](exercices/cours/planets.py) dans le dossier d'exercices de la leçon.
+Jetez un coup d'oeil à `planets.py` dans [le dossier d'exercices pendant le cours](exercices/cours/).
 Le trouvez-vous facile à lire et à comprendre ? Probablement pas.
 Avez-vous remarqué que le tri ne fonctionne pas parce que le code utilise une fonction qui renvoie la liste triée, mais n'utilise pas sa valeur de retour, plutôt qu'un tri sur place ?
 Il est beaucoup plus difficile de repérer ce bug lorsqu'il faut faire appel à toute sa puissance cérébrale pour lire le code.
@@ -363,7 +363,7 @@ Les premières fois, vous serez peut-être plus lent que si vous n'en aviez pas,
 
 ---
 #### Exercice
-Exécutez le code dans [binarytree.py](exercices/cours/binarytree.py).
+Regardez le code de `binarytree.py` [le dossier d'exercices pendant le cours](exercices/cours/).
 Tout d'abord, lancez-le. Il se plante ! Utilisez un debugger pour ajouter des points d'arrêt et examiner ce qui se passe jusqu'à ce que vous en trouviez la cause et que vous corrigiez les bugs.
 Notez que le plantage n'est pas le seul bug.
 
@@ -516,7 +516,7 @@ Cela résout le problème sans nécessiter de copies de données, qui ralentisse
 
 ---
 #### Exercice
-Consultez le code dans [stack.py](exercices/cours/stack.py), qui contient une classe `IntStack` et un exemple d'utilisation.
+Consultez le code de `stack.py` [le dossier d'exercices pendant le cours](exercices/cours/), qui contient une classe `IntStack` et un exemple d'utilisation.
 Ajoutez du code à `IntStack` pour détecter les problèmes à temps, et corrigez les bugs que vous trouvez dans le processus.
 Tout d'abord, regardez ce que le constructeur doit faire. Une fois cela fait, ajoutez un invariant et utilisez-le, ainsi qu'une condition préalable pour `push`.
 Ensuite, corrigez les bugs que vous trouvez.
@@ -581,7 +581,7 @@ Si ce log est conservé dans un fichier et que le serveur est piraté, les attaq
 ### Code seulement pour debugging
 
 Qu'en est-il des contrôles de programmation défensifs et des logs qui sont trop lents pour être raisonnablement activés en production ?
-Par exemple, si un graphe a pour invariant "aucun nœud n'a plus de 2 arêtes", mais que le graphe a typiquement des millions de nœuds, que faire ?
+Par exemple, si un graphe a pour invariant "aucun noeud n'a plus de 2 arêtes", mais que le graphe a typiquement des millions de noeuds, que faire ?
 
 C'est là qu'intervient le code _seulement pour debugging_.
 Les langages de programmation, leurs moteurs d'exécution et les frameworks offrent généralement des moyens d'exécuter le code uniquement en mode debug,

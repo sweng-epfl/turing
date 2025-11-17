@@ -321,7 +321,7 @@ Il ne sert à rien d'écrire une suite de tests complète pour un programme si l
 
 Voyons maintenant un exemple de TDD étape par étape.
 Vous êtes ingénieur logiciel et vous développez une application pour une banque.
-Votre première tâche consiste à mettre en œuvre le retrait d'argent d'un compte.
+Votre première tâche consiste à mettre en oeuvre le retrait d'argent d'un compte.
 La banque vous dit que "les utilisateurs peuvent retirer de l'argent de leur compte bancaire".
 Il vous reste donc une question à poser à la banque : "Un compte bancaire peut-il avoir un solde inférieur à zéro ?".
 La banque répond "non", ce n'est pas possible.
@@ -489,7 +489,7 @@ les tests manuels pour les scénarios de bout en bout fournissent déjà un degr
 
 Ce type de modifications du code peut être effectué de manière récursive jusqu'à ce que seul le "code de collage" entre les modules et les primitives de bas niveau restent non testables.
 Par exemple, une classe "client UDP" peut prendre en paramètre une interface "client IP", de sorte que la fonctionnalité UDP puisse être testée.
-La mise en œuvre de l'interface "client IP" peut elle-même prendre en paramètre une interface "client de données", de sorte que la fonctionnalité IP puisse être testée.
+La mise en oeuvre de l'interface "client IP" peut elle-même prendre en paramètre une interface "client de données", de sorte que la fonctionnalité IP puisse être testée.
 Les implémentations de l'interface "client de données", comme Ethernet ou Wi-Fi, devront probablement être testées de bout en bout puisqu'elles ne dépendent pas elles-mêmes d'autres logiciels locaux.
 
 ---

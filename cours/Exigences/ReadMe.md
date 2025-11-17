@@ -22,7 +22,7 @@ Mais peut-être l'utilisateur a-t-il d'autres exigences, comme le fait de ne pas
 Les utilisateurs peuvent également avoir des exigences plus spécifiques, comme le fait de vouloir un moyen de transport à faible émission de carbone,
 et doivent se déplacer entre des endroits éloignés des transports publics, auquel cas une voiture électrique alimentée par une électricité bas-carbone pourrait être une solution.
 
-Les exigences ne concernent pas les détails de la mise en œuvre.
+Les exigences ne concernent pas les détails de la mise en oeuvre.
 Un type spécifique de moteur électrique ou un type spécifique d'acier pour les portières de la voiture ne sont pas des exigences de l'utilisateur.
 Toutefois, les utilisateurs peuvent avoir des besoins qui amènent les concepteurs du système à faire de tels choix.
 
@@ -174,7 +174,7 @@ Lesquels des éléments suivants constituent des bons récits utilisateur et pou
 ## Comment pouvons-nous développer à partir des exigences ?
 
 Vous avez écouté les utilisateurs, vous les avez abstraits dans des personas et leurs exigences dans des récits utilisateurs, et vous avez développé une application sur cette base.
-Vous êtes convaincu que vos personas aimeraient votre application et que votre mise en œuvre répond aux besoins définis par les récits des utilisateurs.
+Vous êtes convaincu que vos personas aimeraient votre application et que votre mise en oeuvre répond aux besoins définis par les récits des utilisateurs.
 Après avoir dépensé beaucoup de temps et d'argent, vous disposez maintenant d'une application que vous pouvez présenter à de vrais utilisateurs... et ils ne l'aiment pas.
 Ce n'est pas du tout ce qu'ils avaient imaginé. Qu'est-ce qui n'a pas fonctionné ?
 Ce que vous venez de faire, en demandant aux utilisateurs leur avis sur l'application, est une _validation_ : vous vérifiez si ce que vous avez spécifié correspond à ce que veulent les utilisateurs.

@@ -12,6 +12,7 @@
 
 Les [solutions](solutions) sont disponibles.
 
+Il y a aussi des [exercices pendant le cours](cours/).
 
 **Idées pour vos propres projets** :
 

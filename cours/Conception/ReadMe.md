@@ -173,7 +173,7 @@ example(Dog()) # "Un chien est Un animal"
 ```
 
 #### Exercice, partie 1
-Ouvrez le fichier [`interactions.py`](./cours/exercices/interactions.py).
+Ouvrez le fichier `interactions.py` dans [le dossier d'exercices pendant le cours](exercices/cours/).
 
 Comme indiqué en commentaire, déplacez le code interagissant avec l’utilisateur dans une nouvelle `class UI`.
 
@@ -210,7 +210,7 @@ ui.show(hobby + ', quelle bonne idée !')
 </details>
 
 #### Exercice, partie 2
-Gardez votre solution de la partie 1, et ouvrez le fichier [`interactions-tkinter.py`](./cours/exercices/interactions-tkinter.py).
+Gardez votre solution de la partie 1, et ouvrez le fichier `interactions-tkinter.py` dans [le dossier d'exercices pendant le cours](exercices/cours/).
 
 Les fonctions dans ce fichier permettent d'afficher du texte et de demander du texte à l'utilisateur à l'aide de `tkinter`, sorte de boîte à outils graphique pour des interfaces utilisateur basiques en Python.
 
@@ -345,7 +345,7 @@ a un jour [fait remarquer](https://infinite.mit.edu/video/barbara-liskov) que _l
 
 La modularité consiste à diviser et subdiviser les logiciels en unités indépendantes qui peuvent être maintenues séparément et réutilisées dans d'autres systèmes : les modules.
 Chaque module possède une interface, qui est ce que le module expose au reste du système. Le module abstrait certains concepts et présente cette abstraction au monde.
-Le code qui utilise le module n'a pas besoin de savoir ni de se soucier de la manière dont l'abstraction est mise en œuvre, mais seulement de son existence.
+Le code qui utilise le module n'a pas besoin de savoir ni de se soucier de la manière dont l'abstraction est mise en oeuvre, mais seulement de son existence.
 
 Par exemple, il n'est pas nécessaire de s'y connaître en menuiserie ou en textiles pour comprendre comment utiliser un canapé.
 Certains canapés peuvent même être personnalisés par les clients, qui peuvent par exemple choisir d'y ajouter un compartiment de rangement ou un lit convertible, car les canapés sont composés de sous-modules.
@@ -353,7 +353,7 @@ Certains canapés peuvent même être personnalisés par les clients, qui peuven
 En programmation, l'interface d'un module est généralement appelée "API", abréviation de "Application Programming Interface" (interface de programmation d'application).
 Les API contiennent des objets, des fonctions, des erreurs, des constantes, etc.
 Ce n'est pas la même chose que le concept d'"interface" dans les langages de programmation tels que Java.
-Dans cette leçon, nous aborderons la notion générale d'interface, et non la mise en œuvre spécifique de ce concept dans un langage particulier.
+Dans cette leçon, nous aborderons la notion générale d'interface, et non la mise en oeuvre spécifique de ce concept dans un langage particulier.
 
 Prenons l'exemple de la fonction Python suivante :
 ```python
@@ -462,7 +462,7 @@ class Stack {
 }
 ```
 Pour une raison quelconque, `search` renvoie une position basée sur 1, alors que tous les autres index en Java sont basés sur 0.
-Ainsi, toute description de `search` doit inclure cette information, et un coup d'œil rapide au code qui utilise `search` peut manquer un bug si l'index est accidentellement utilisé comme s'il était basé sur 0.
+Ainsi, toute description de `search` doit inclure cette information, et un coup d'oeil rapide au code qui utilise `search` peut manquer un bug si l'index est accidentellement utilisé comme s'il était basé sur 0.
 
 Il convient de suivre le "principe de moindre surprise", c'est-à-dire que les choses doivent se comporter de la manière dont la plupart des gens s'y attendent, et donc ne pas déroger aux règles courantes.
 Un autre exemple tiré de Java est la méthode `equals` de la classe `URL`.
@@ -534,10 +534,10 @@ Un câble à fibre optique offre un niveau d'abstraction très bas, qui traite l
 Le protocole Ethernet offre un niveau d'abstraction plus élevé, qui traite les adresses MAC et transmet des octets.
 Une application mobile offre un niveau d'abstraction encore plus élevé, qui traite les requêtes et les réponses pour transmettre des informations telles que les menus quotidiens des cafétérias.
 
-Si vous deviez mettre en œuvre une application mobile et que vous ne disposiez que d'un câble à fibre optique, vous passeriez la plupart de votre temps à réimplémenter des abstractions intermédiaires,
+Si vous deviez mettre en oeuvre une application mobile et que vous ne disposiez que d'un câble à fibre optique, vous passeriez la plupart de votre temps à réimplémenter des abstractions intermédiaires,
 car il est difficile de définir une demande pour le menu du jour en termes de bits individuels.
 
-Mais si vous deviez mettre en œuvre une extension de câble à fibre optique et que vous ne disposiez que de l'abstraction de haut niveau des menus quotidiens de la cafétéria, vous ne seriez pas en mesure de faire votre travail.
+Mais si vous deviez mettre en oeuvre une extension de câble à fibre optique et que vous ne disposiez que de l'abstraction de haut niveau des menus quotidiens de la cafétéria, vous ne seriez pas en mesure de faire votre travail.
 L'abstraction de haut niveau est pratique pour les opérations de haut niveau, mais elle cache volontairement les détails de bas niveau.
 
 Lorsque vous concevez un module, réfléchissez à son niveau d'abstraction : où se situe-t-il dans le spectre des abstractions de bas niveau à haut niveau ?
@@ -558,9 +558,9 @@ car vous devez gérer explicitement tous les concepts GPU de bas niveau que mêm
 Mais cela ne fait pas de Vulkan une "mauvaise" API, seulement une API qui n'est pas adaptée aux tâches de haut niveau telles que l'affichage de triangles.
 Au contraire, Vulkan et les API similaires telles que [Direct3D 12](https://fr.wikipedia.org/wiki/Direct3D) sont destinées à être utilisées pour les moteurs de jeux et autres abstractions "intermédiaires" qui
 fournissent elles-mêmes des abstractions de plus haut niveau. Par exemple, OpenGL peut être implémenté comme une couche au-dessus de Vulkan.
-Sans ces abstractions de bas niveau, il serait impossible de mettre en œuvre efficacement des abstractions de haut niveau. En effet, les performances ont été la principale motivation pour la création d'API telles que Vulkan.
+Sans ces abstractions de bas niveau, il serait impossible de mettre en oeuvre efficacement des abstractions de haut niveau. En effet, les performances ont été la principale motivation pour la création d'API telles que Vulkan.
 
-Lors de la mise en œuvre d'une abstraction par dessus une abstraction de niveau inférieur, il est important d'éviter les "fuites d'abstraction".
+Lors de la mise en oeuvre d'une abstraction par dessus une abstraction de niveau inférieur, il est important d'éviter les "fuites d'abstraction".
 Une fuite d'abstraction se produit lorsqu'un détail de bas niveau "fuite" d'une abstraction de haut niveau, obligeant les utilisateurs de l'abstraction à comprendre et à gérer des détails de bas niveau qui ne les concernent pas.
 Par exemple, si la fonction permettant d'afficher le menu du jour a la signature `def showMenu(date, useIPv4)`, toute personne souhaitant écrire une application qui affiche des menus doit
 réfléchir explicitement à la question de savoir si elle souhaite utiliser IPv4, un détail de niveau inférieur qui ne devrait pas être pertinent dans ce contexte.
