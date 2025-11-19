@@ -170,7 +170,7 @@ mais que `Dictionary` offre des performances similaires lorsqu'il utilise des ch
 
 Enfin, n'oubliez pas qu'il n'est pas utile de comparer et d'améliorer un code qui est déjà suffisamment rapide.
 Bien que les micro-benchmarks puissent être addictifs, vous devriez consacrer votre temps à des tâches qui ont un impact sur les utilisateurs finaux.
-Accélérer une opération de 100 ms à 80 ms peut sembler formidable, mais si les utilisateurs se soucient uniquement que la tâche prenne moins d'une seconde, ils auraient probablement préféré que vous consacriez votre temps à ajouter des fonctionnalités ou à corriger des bogues.
+Accélérer une opération de 100 ms à 80 ms peut sembler formidable, mais si les utilisateurs se soucient uniquement que la tâche prenne moins d'une seconde, ils auraient probablement préféré que vous consacriez votre temps à ajouter des fonctionnalités ou à corriger des bugs.
 
 
 ## Comment concevoir des systèmes rapides ?

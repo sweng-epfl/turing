@@ -404,7 +404,7 @@ $ git commit --amend -m 'Fusionner la branche feature/today'
 
 Nous n'avons modifié ici que le message de commit, mais nous pourrions également modifier le contenu du commit, c'est-à-dire les modifications elles-mêmes.
 
-Parfois, nous apportons des modifications que nous ne voulons pas vraiment, par exemple des modifications temporaires pendant que nous déboguons un code.
+Parfois, nous apportons des modifications que nous ne voulons pas vraiment, par exemple des modifications temporaires pendant que nous débugguons un code.
 Effectuons un "mauvais" changement :
 
 ```sh
@@ -597,9 +597,9 @@ Les détails doivent décrire _ce que_ les changements font et _pourquoi_ vous l
 Il est inutile de décrire comment, car le message de commit est associé au contenu du commit, et celui-ci décrit déjà la manière dont vous avez modifié le code.
 
 
-## Comment éviter de fusionner du code bogué ?
+## Comment éviter de fusionner du code buggué ?
 
-La fusion de code bogué dans la branche principale d'un dépôt est une gêne pour tous les contributeurs de ce dépôt.
+La fusion de code buggué dans la branche principale d'un dépôt est une gêne pour tous les contributeurs de ce dépôt.
 Ils devront corriger le code avant de faire le travail qu'ils veulent réellement faire, et ils ne le corrigeront peut-être pas tous de la même manière, ce qui entraînera des conflits.
 
 Idéalement, nous n'accepterions les demandes de retrait que si le code résultant compile, est "propre" selon les normes de l'équipe et a été testé.

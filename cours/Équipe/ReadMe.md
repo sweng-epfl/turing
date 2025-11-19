@@ -334,7 +334,7 @@ Les revues de code réduisent la probabilité d'erreurs en faisant examiner le c
 Ce n'est bien sûr pas un concept nouveau, puisqu'il existe dans tout autre processus de création d'un résultat, comme donner son avis sur le brouillon d'un livre.
 Et cela a commencé il y a longtemps, même dans le domaine du génie logiciel, avec Ada Lovelace [suppliant Charles Babbage](https://web.archive.org/web/20241212033625/https://www.iflscience.com/relatable-ada-lovelace-letter-shows-her-begging-charles-babbage-not-to-mess-with-her-math-65640) de cesser de modifier ses programmes, car il y introduisait des erreurs.
 
-Si quelqu'un suggère des modifications au code et qu'une autre personne les examine, qui est responsable des bogues restants dans le code après avoir été merge sur la branche principale ?
+Si quelqu'un suggère des modifications au code et qu'une autre personne les examine, qui est responsable des bugs restants dans le code après avoir été merge sur la branche principale ?
 Il s'agit d'une question piège : la réponse est « toute l'équipe ». L'objectif n'est pas de blâmer les individus pour leurs erreurs humaines, car nous savons que celles-ci continueront de se produire même si quelqu'un d'autre lit le code, mais simplement moins souvent.
 Si la même personne commet systématiquement les mêmes erreurs, une intervention est nécessaire, mais sinon, l'objectif est de fournir un logiciel de qualité, et non de déterminer qui a commis le plus d'erreurs.
 
@@ -452,7 +452,7 @@ Par exemple, vous pourriez dire certaines des choses suivantes :
 - « _Je ne suis pas sûr de l'implémentation de..._ »
 
 Avant de demander à quelqu'un d'autre de réviser votre code, comme pour tout autre résultat que vous produisez, effectuez vous-même une révision afin de détecter les erreurs élémentaires.
-Peut-être avez-vous oublié de supprimer du code que vous aviez ajouté lors du débogage. Peut-être avez-vous commenté une ligne et oublié de la décommenter. Peut-être avez-vous modifié un fichier par accident.
+Peut-être avez-vous oublié de supprimer du code que vous aviez ajouté lors du débuggage. Peut-être avez-vous commenté une ligne et oublié de la décommenter. Peut-être avez-vous modifié un fichier par accident.
 Au lieu d'attendre que quelqu'un d'autre vous le signale, effectuez vous-même une révision pour le découvrir.
 Vous pouvez également laisser des commentaires sur votre propre pull request, de la même manière que vous pouvez laisser une description générale.
 Par exemple, vous pouvez laisser des commentaires tels que :
