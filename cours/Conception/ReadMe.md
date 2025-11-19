@@ -591,7 +591,7 @@ Par exemple, `getPastWeather` sera probablement implémenté avec une bibliothè
 
 ---
 #### Exercice
-Regardez `calc.py` dans les [exercices pendant le cours](exercises/cours). Il mélange toutes sortes de concepts. Modularisez-le !
+Regardez `calc.py` dans les [exercices pendant le cours](exercices/cours). Il mélange toutes sortes de concepts. Modularisez-le !
 Réfléchissez aux modules dont vous avez besoin et à la manière dont vous devriez concevoir le système dans son ensemble.
 Tout d'abord, à quoi ressemblera le code de haut niveau ?
 <details>

@@ -508,4 +508,4 @@ Dans cette leçon, vous avez appris :
 - Optimisation : conception, benchmarking, profiling
 - Compromis courants : Cache, paresse, exec. différée, streaming
 
-Vous pouvez maintenant consulter les [exercices](exercises/) !
+Vous pouvez maintenant consulter les [exercices](exercices/) !

@@ -202,8 +202,7 @@ Vous pouvez le considérer comme le nom d'un plat plutôt que sa recette.
 Vous avez du poisson ? Vous pourriez préparer du poisson avec des légumes et du riz, ce qui est une combinaison saine. La sauce soja est également une bonne idée pour accompagner le plat.
 La manière dont vous cuisinez le poisson ou les légumes que vous choisissez dépendent de vous.
 
-Il existe de nombreuses patterns et encore plus de descriptions en ligne. Nous fournissons un [bref résumé](../../DesignPatterns.md) des plus courantes.
-
+Il existe de nombreuses patterns et encore plus de descriptions en ligne.
 Dans ce cours, nous verrons des modèles permettant de séparer l'interface utilisateur d'un programme, la logique métier qui est au coeur du programme et les stratégies réutilisables dont le programme a besoin,
 telles que le fait de réessayer lorsqu'une requête échoue.
 
