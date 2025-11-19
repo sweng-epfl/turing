@@ -2,7 +2,7 @@
 
 **Prérequis 1 : Installation de Git** : Pour suivre cette partie, vous devez :
 > - Installer Git. Sous Windows, utilisez [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) car Git est principalement conçu pour Linux.
->   Sur macOS, voir [la documentation de git] (https://git-scm.com/download/mac). Sous Linux, Git est peut-être déjà installé, ou utilisez la gestionnaire de paquets de votre distribution.
+>   Sur macOS, voir [la documentation de git](https://git-scm.com/download/mac). Sous Linux, Git est peut-être déjà installé, ou utilisez la gestionnaire de paquets de votre distribution.
 >   Si vous avez installé Git avec succès, l'exécution de `git --version` dans la ligne de commande devrait afficher un numéro de version.
 > - Dites à Git qui vous êtes en lançant `git config --global user.name 'votre_nom'` avec votre nom et `git config --global user.email 'votre_email'`.
 > - Choisissez un éditeur que Git ouvrira pour écrire un résumé de vos changements avec `git config --global core.editor 'votre_editeur'`,
