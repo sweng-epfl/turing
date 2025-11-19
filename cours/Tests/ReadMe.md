@@ -371,7 +371,7 @@ Il vous donne une autre exigence qu'il avait oublié : la banque peut bloquer de
 Vous pouvez maintenant traduire cette exigence en tests, en ajoutant du code si nécessaire pour que les tests se compilent, puis en implémentant le code.
 Une fois que vous aurez terminé, vous reviendrez vers le client, et ainsi de suite jusqu'à ce que votre demande réponde à toutes les exigences.
 
-----
+---
 #### Exercice
 A vous de jouer ! Dans [le dossier d'exercices pendant le cours](exercices/cours) vous trouverez `people_counter.py`, qui est documenté mais non implémenté.
 Écrivez d'abord des tests, puis implémentez le code et corrigez votre code s'il ne passe pas les tests, à la manière TDD.
@@ -388,7 +388,7 @@ et le maximum ne peut être inférieur à zéro.
 </p>
 </details>
 
-----
+---
 
 Les tests effectués _après_ le déploiement sont communément appelés **tests de régression**. L'objectif est de s'assurer que les anciens bugs ne réapparaissent pas.
 
@@ -509,7 +509,7 @@ Si vous avez le temps et l'envie, essayez un exercice optionnel : implémentez l
 </p>
 </details>
 
-----
+---
 
 Dans des langages fortement typés comme Java, si vous avez besoin d'écrire beaucoup de dépendances de test différentes, vous pouvez trouver utiles les frameworks de _mocking_ tels que [Mockito](https://site.mockito.org/) pour Java.
 Ces frameworks vous permettent d'écrire un faux `HttpClient`, par exemple, comme ceci :

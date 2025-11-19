@@ -359,7 +359,7 @@ Au premier abord, l'objectif peut sembler se limiter à « trouver des bugs », 
 Heureusement, il existe des recherches empiriques sur la révision du code, dans lesquelles des chercheurs interrogent de nombreux ingénieurs logiciels afin de recueillir leur opinion.
 Voici, par exemple, les principales motivations des développeurs pour la révision, telles que recueillies par [Bacchelli et Bird](https://doi.org/10.1109/ICSE.2013.6606617) en 2013 :
 
-<p align="center"><img alt="« Motivations classées par les développeurs », dans l'ordre : « Trouver des défauts », « Amélioration du code », « Solutions alternatives », « Transfert de connaissances », et quelques autres » src="images/bacchelli-bird-goals.png" width="50%" /></p>
+<p align="center"><img alt="« Motivations classées par les développeurs », dans l'ordre : « Trouver des défauts », « Amélioration du code », « Solutions alternatives », « Transfert de connaissances », et quelques autres" src="images/bacchelli-bird-goals.png" width="50%" /></p>
 
 Sans surprise, la recherche de défauts arrive en tête, suivie de près par l'amélioration du code, c'est-à-dire la proposition de meilleures méthodes même si le code soumis ne comporte pas de bugs, et les solutions alternatives, c'est-à-dire la proposition de meilleurs choix de conception.
 Par exemple, au lieu d'une solution de 100 lignes, la personne qui lit le code pourrait signaler qu'il existe déjà une méthode dans la base de code qui fait ce que le soumissionnaire du code voulait faire.
