@@ -87,7 +87,7 @@ L'ingénierie d'un logiciel fiable va toutefois au-delà du problème impossible
 Prenons l'exemple d'un programme qui, à partir d'une liste d'étudiants et de leurs notes, envoie à chacun d'entre eux un courrier électronique leur annonçant leur note.
 Il s'agit là d'un bon exemple de logiciel automatisant une tâche qui serait longue et sujette à des erreurs si elle était effectuée manuellement.
 Le logiciel transforme une ligne de saisie telle que "Alice, 9/10" en un courriel envoyé à Alice pour l'informer de sa note.
-Cela fonctionne-t-il toujours si, au lieu d'avoir un nom utilisant des lettres anglaises comme Alice, l'élève s'appelle 狄仁傑 ou محمد بن موسی خوارزمی ?
+Cela fonctionne-t-il toujours si, au lieu d'avoir un nom utilisant des lettres anglaises comme Alice, l'élève s'appelle محمد بن موسی خوارزمی ?
 Que se passe-t-il si l'élève a un nom à l'américaine comme "Bob, Jr", qui comprend une virgule qui est également utilisée par le logiciel pour séparer les noms et les notes dans l'entrée ?
 Que se passe-t-il si, après l'envoi des premiers courriels, l'ordinateur sur lequel le logiciel est exécuté perd sa connexion Internet ?
 Les courriels sont-ils perdus ? L'exécution répétée du logiciel entraîne-t-elle l'envoi de courriels en double ?
