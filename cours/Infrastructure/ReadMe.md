@@ -188,7 +188,7 @@ Ce dossier `.git/` est un dossier spécial que Git utilise pour stocker les mét
 Créez un fichier :
 
 ```sh
-$ echo 'Hello' > hello.txt"
+$ echo 'Hello' > hello.txt
 ```
 
 Nous pouvons maintenant demander à Git ce qu'il pense qu'il se passe :
