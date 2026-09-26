@@ -16,7 +16,7 @@ class BinaryTree:
     """
     def __init__(self, v, l, r):
         """
-        Initialise un arbre binaire avec valeur 'v' et descendants 'l' (gauche) et 'd' (droite).
+        Initialise un arbre binaire avec valeur 'v' et descendants 'l' (gauche) et 'r' (droite).
         """
         self.value = v
         self.left = l
